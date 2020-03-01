@@ -1,0 +1,670 @@
+{
+  "contractName": "LegacyUpgrader",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        },
+        {
+          "name": "_toDisable",
+          "type": "address[]"
+        },
+        {
+          "name": "_toEnable",
+          "type": "address[]"
+        }
+      ],
+      "name": "upgrade",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "toDisable",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "toEnable",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.4;\n\n/**\n * @title Legacy Upgrader\n * @dev Old Interface for a contract that could upgrade wallets by enabling/disabling modules.\n * @author Julien Niset - <julien@argent.im>\n */\ninterface LegacyUpgrader {\n\n    /**\n     * @dev Upgrades a wallet by enabling/disabling modules.\n     * @param _wallet The owner.\n     */\n    function upgrade(address payable _wallet, address[] calldata _toDisable, address[] calldata _toEnable) external;\n\n    function toDisable() external view returns (address[] memory);\n    function toEnable() external view returns (address[] memory);\n}",
+  "sourcePath": "/home/amxx/Work/Argent/argent-contracts/contracts/upgrade/Legacy/LegacyUpgrader.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/upgrade/Legacy/LegacyUpgrader.sol",
+    "exportedSymbols": {
+      "LegacyUpgrader": [
+        26926
+      ]
+    },
+    "id": 26927,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 26902,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:81"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title Legacy Upgrader\n@dev Old Interface for a contract that could upgrade wallets by enabling/disabling modules.\n@author Julien Niset - <julien@argent.im>",
+        "fullyImplemented": false,
+        "id": 26926,
+        "linearizedBaseContracts": [
+          26926
+        ],
+        "name": "LegacyUpgrader",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Upgrades a wallet by enabling/disabling modules.\n@param _wallet The owner.",
+            "id": 26913,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "upgrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 26911,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 26904,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26913,
+                  "src": "358:23:81",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 26903,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "358:15:81",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 26907,
+                  "name": "_toDisable",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26913,
+                  "src": "383:29:81",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 26905,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "383:7:81",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 26906,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "383:9:81",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 26910,
+                  "name": "_toEnable",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26913,
+                  "src": "414:28:81",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 26908,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "414:7:81",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 26909,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "414:9:81",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "357:86:81"
+            },
+            "returnParameters": {
+              "id": 26912,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "452:0:81"
+            },
+            "scope": 26926,
+            "src": "341:112:81",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 26919,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "toDisable",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 26914,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "477:2:81"
+            },
+            "returnParameters": {
+              "id": 26918,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 26917,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26919,
+                  "src": "503:16:81",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 26915,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "503:7:81",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 26916,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "503:9:81",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "502:18:81"
+            },
+            "scope": 26926,
+            "src": "459:62:81",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 26925,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "toEnable",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 26920,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "543:2:81"
+            },
+            "returnParameters": {
+              "id": 26924,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 26923,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26925,
+                  "src": "569:16:81",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 26921,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "569:7:81",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 26922,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "569:9:81",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "568:18:81"
+            },
+            "scope": 26926,
+            "src": "526:61:81",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 26927,
+        "src": "199:390:81"
+      }
+    ],
+    "src": "0:589:81"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/upgrade/Legacy/LegacyUpgrader.sol",
+    "exportedSymbols": {
+      "LegacyUpgrader": [
+        26926
+      ]
+    },
+    "id": 26927,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 26902,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:81"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title Legacy Upgrader\n@dev Old Interface for a contract that could upgrade wallets by enabling/disabling modules.\n@author Julien Niset - <julien@argent.im>",
+        "fullyImplemented": false,
+        "id": 26926,
+        "linearizedBaseContracts": [
+          26926
+        ],
+        "name": "LegacyUpgrader",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Upgrades a wallet by enabling/disabling modules.\n@param _wallet The owner.",
+            "id": 26913,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "upgrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 26911,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 26904,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26913,
+                  "src": "358:23:81",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 26903,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "358:15:81",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 26907,
+                  "name": "_toDisable",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26913,
+                  "src": "383:29:81",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 26905,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "383:7:81",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 26906,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "383:9:81",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 26910,
+                  "name": "_toEnable",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26913,
+                  "src": "414:28:81",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 26908,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "414:7:81",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 26909,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "414:9:81",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "357:86:81"
+            },
+            "returnParameters": {
+              "id": 26912,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "452:0:81"
+            },
+            "scope": 26926,
+            "src": "341:112:81",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 26919,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "toDisable",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 26914,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "477:2:81"
+            },
+            "returnParameters": {
+              "id": 26918,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 26917,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26919,
+                  "src": "503:16:81",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 26915,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "503:7:81",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 26916,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "503:9:81",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "502:18:81"
+            },
+            "scope": 26926,
+            "src": "459:62:81",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 26925,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "toEnable",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 26920,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "543:2:81"
+            },
+            "returnParameters": {
+              "id": 26924,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 26923,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 26925,
+                  "src": "569:16:81",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 26921,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "569:7:81",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 26922,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "569:9:81",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "568:18:81"
+            },
+            "scope": 26926,
+            "src": "526:61:81",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 26927,
+        "src": "199:390:81"
+      }
+    ],
+    "src": "0:589:81"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang",
+    "optimizer": true,
+    "runs": 200
+  },
+  "networks": {},
+  "schemaVersion": "2.2.4",
+  "updatedAt": "2020-02-29T16:28:22.661Z"
+}

@@ -1,0 +1,411 @@
+{
+  "contractName": "DSThing",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "owner_",
+          "type": "address"
+        }
+      ],
+      "name": "setOwner",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "authority_",
+          "type": "address"
+        }
+      ],
+      "name": "setAuthority",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "authority",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": true,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "sig",
+          "type": "bytes4"
+        },
+        {
+          "indexed": true,
+          "name": "guy",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "foo",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "bar",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "wad",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "fax",
+          "type": "bytes"
+        }
+      ],
+      "name": "LogNote",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "authority",
+          "type": "address"
+        }
+      ],
+      "name": "LogSetAuthority",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "LogSetOwner",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604081905260018054600160a060020a03191633908117909155907fce241d7ca1f669fee44b6fc00b8eba2df3bb514eed0f6f668f8f89096e81ed9490600090a2610430806100516000396000f3fe608060405234801561001057600080fd5b5060043610610068577c0100000000000000000000000000000000000000000000000000000000600035046313af4035811461006d5780637a9e5e4b146100955780638da5cb5b146100bb578063bf7e214f146100df575b600080fd5b6100936004803603602081101561008357600080fd5b5035600160a060020a03166100e7565b005b610093600480360360208110156100ab57600080fd5b5035600160a060020a03166101dc565b6100c36102cd565b60408051600160a060020a039092168252519081900360200190f35b6100c36102dc565b610112336000357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166102eb565b151561017f57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601460248201527f617574683a206e6f7420617574686f72697a6564000000000000000000000000604482015290519081900360640190fd5b6001805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0383811691909117918290556040519116907fce241d7ca1f669fee44b6fc00b8eba2df3bb514eed0f6f668f8f89096e81ed9490600090a250565b610207336000357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166102eb565b151561027457604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601460248201527f617574683a206e6f7420617574686f72697a6564000000000000000000000000604482015290519081900360640190fd5b6000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a03838116919091178083556040519116917f1abebea81bfa2637f28358c371278fb15ede7ea8dd28d2e03b112ff6d936ada491a250565b600154600160a060020a031681565b600054600160a060020a031681565b6000600160a060020a038316301415610306575060016103fe565b600154600160a060020a0384811691161415610324575060016103fe565b600054600160a060020a0316151561033e575060006103fe565b600054604080517fb7009613000000000000000000000000000000000000000000000000000000008152600160a060020a0386811660048301523060248301527bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19861660448301529151919092169163b7009613916064808301926020929190829003018186803b1580156103cf57600080fd5b505afa1580156103e3573d6000803e3d6000fd5b505050506040513d60208110156103f957600080fd5b505190505b9291505056fea165627a7a72305820e2347e47fbca4c60bed66b9b49a016a56460aea67e18947346297d7c48950c970029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610068577c0100000000000000000000000000000000000000000000000000000000600035046313af4035811461006d5780637a9e5e4b146100955780638da5cb5b146100bb578063bf7e214f146100df575b600080fd5b6100936004803603602081101561008357600080fd5b5035600160a060020a03166100e7565b005b610093600480360360208110156100ab57600080fd5b5035600160a060020a03166101dc565b6100c36102cd565b60408051600160a060020a039092168252519081900360200190f35b6100c36102dc565b610112336000357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166102eb565b151561017f57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601460248201527f617574683a206e6f7420617574686f72697a6564000000000000000000000000604482015290519081900360640190fd5b6001805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0383811691909117918290556040519116907fce241d7ca1f669fee44b6fc00b8eba2df3bb514eed0f6f668f8f89096e81ed9490600090a250565b610207336000357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166102eb565b151561027457604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601460248201527f617574683a206e6f7420617574686f72697a6564000000000000000000000000604482015290519081900360640190fd5b6000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a03838116919091178083556040519116917f1abebea81bfa2637f28358c371278fb15ede7ea8dd28d2e03b112ff6d936ada491a250565b600154600160a060020a031681565b600054600160a060020a031681565b6000600160a060020a038316301415610306575060016103fe565b600154600160a060020a0384811691161415610324575060016103fe565b600054600160a060020a0316151561033e575060006103fe565b600054604080517fb7009613000000000000000000000000000000000000000000000000000000008152600160a060020a0386811660048301523060248301527bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19861660448301529151919092169163b7009613916064808301926020929190829003018186803b1580156103cf57600080fd5b505afa1580156103e3573d6000803e3d6000fd5b505050506040513d60208110156103f957600080fd5b505190505b9291505056fea165627a7a72305820e2347e47fbca4c60bed66b9b49a016a56460aea67e18947346297d7c48950c970029",
+  "sourceMap": "848:51:70:-;;;;;1093:5:66;:18;;-1:-1:-1;;;;;;1093:18:66;1101:10;1093:18;;;;;;1101:10;1126:23;;1093:5;;1126:23;848:51:70;;;;;;",
+  "deployedSourceMap": "848:51:70:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;848:51:70;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1162:130:66;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1162:130:66;-1:-1:-1;;;;;1162:130:66;;:::i;:::-;;1298:167;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1298:167:66;-1:-1:-1;;;;;1298:167:66;;:::i;1029:26::-;;;:::i;:::-;;;;-1:-1:-1;;;;;1029:26:66;;;;;;;;;;;;;;993:30;;;:::i;1162:130::-;1503:33;1516:10;1528:7;;-1:-1:-1;;1528:7:66;1503:12;:33::i;:::-;1495:66;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1238:5;:14;;-1:-1:-1;;1238:14:66;-1:-1:-1;;;;;1238:14:66;;;;;;;;;;;1267:18;;1279:5;;;1267:18;;-1:-1:-1;;1267:18:66;1162:130;:::o;1298:167::-;1503:33;1516:10;1528:7;;-1:-1:-1;;1528:7:66;1503:12;:33::i;:::-;1495:66;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1386:9;:22;;-1:-1:-1;;1386:22:66;-1:-1:-1;;;;;1386:22:66;;;;;;;;;;1423:35;;1447:9;;;1423:35;;;1298:167;:::o;1029:26::-;;;-1:-1:-1;;;;;1029:26:66;;:::o;993:30::-;;;-1:-1:-1;;;;;993:30:66;;:::o;1585:370::-;1655:4;-1:-1:-1;;;;;1675:20:66;;1690:4;1675:20;1671:278;;;-1:-1:-1;1718:4:66;1711:11;;1671:278;1750:5;;-1:-1:-1;;;;;1743:12:66;;;1750:5;;1743:12;1739:210;;;-1:-1:-1;1778:4:66;1771:11;;1739:210;1828:1;1803:9;-1:-1:-1;;;;;1803:9:66;:27;1799:150;;;-1:-1:-1;1853:5:66;1846:12;;1799:150;1896:9;;:42;;;;;;-1:-1:-1;;;;;1896:42:66;;;;;;;1927:4;1896:42;;;;-1:-1:-1;;1896:42:66;;;;;;;;:9;;;;;:17;;:42;;;;;;;;;;;;;;:9;:42;;;5:2:-1;;;;30:1;27;20:12;5:2;1896:42:66;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1896:42:66;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1896:42:66;;-1:-1:-1;1799:150:66;1585:370;;;;:::o",
+  "source": "// thing.sol - `auth` with handy mixins. your things should be DSThings\n\n// Copyright (C) 2017  DappHub, LLC\n\n// This program is free software: you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation, either version 3 of the License, or\n// (at your option) any later version.\n\n// This program is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with this program.  If not, see <http://www.gnu.org/licenses/>.\n\npragma solidity ^0.5.4;\n\nimport \"./DSAuth.sol\";\nimport \"./DSNote.sol\";\nimport \"./DSMath.sol\";\n\ncontract DSThing is DSAuth, DSNote, DSMath {\n    \n}\n",
+  "sourcePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSThing.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSThing.sol",
+    "exportedSymbols": {
+      "DSThing": [
+        23096
+      ]
+    },
+    "id": 23097,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 23086,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "753:23:70"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSAuth.sol",
+        "file": "./DSAuth.sol",
+        "id": 23087,
+        "nodeType": "ImportDirective",
+        "scope": 23097,
+        "sourceUnit": 22707,
+        "src": "778:22:70",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSNote.sol",
+        "file": "./DSNote.sol",
+        "id": 23088,
+        "nodeType": "ImportDirective",
+        "scope": 23097,
+        "sourceUnit": 23048,
+        "src": "801:22:70",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSMath.sol",
+        "file": "./DSMath.sol",
+        "id": 23089,
+        "nodeType": "ImportDirective",
+        "scope": 23097,
+        "sourceUnit": 23007,
+        "src": "824:22:70",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 23090,
+              "name": "DSAuth",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 22706,
+              "src": "868:6:70",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_DSAuth_$22706",
+                "typeString": "contract DSAuth"
+              }
+            },
+            "id": 23091,
+            "nodeType": "InheritanceSpecifier",
+            "src": "868:6:70"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 23092,
+              "name": "DSNote",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 23047,
+              "src": "876:6:70",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_DSNote_$23047",
+                "typeString": "contract DSNote"
+              }
+            },
+            "id": 23093,
+            "nodeType": "InheritanceSpecifier",
+            "src": "876:6:70"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 23094,
+              "name": "DSMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 23006,
+              "src": "884:6:70",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_DSMath_$23006",
+                "typeString": "contract DSMath"
+              }
+            },
+            "id": 23095,
+            "nodeType": "InheritanceSpecifier",
+            "src": "884:6:70"
+          }
+        ],
+        "contractDependencies": [
+          22592,
+          22706,
+          23006,
+          23047
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 23096,
+        "linearizedBaseContracts": [
+          23096,
+          23006,
+          23047,
+          22706,
+          22592
+        ],
+        "name": "DSThing",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 23097,
+        "src": "848:51:70"
+      }
+    ],
+    "src": "753:147:70"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSThing.sol",
+    "exportedSymbols": {
+      "DSThing": [
+        23096
+      ]
+    },
+    "id": 23097,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 23086,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "753:23:70"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSAuth.sol",
+        "file": "./DSAuth.sol",
+        "id": 23087,
+        "nodeType": "ImportDirective",
+        "scope": 23097,
+        "sourceUnit": 22707,
+        "src": "778:22:70",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSNote.sol",
+        "file": "./DSNote.sol",
+        "id": 23088,
+        "nodeType": "ImportDirective",
+        "scope": 23097,
+        "sourceUnit": 23048,
+        "src": "801:22:70",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/maker/DS/DSMath.sol",
+        "file": "./DSMath.sol",
+        "id": 23089,
+        "nodeType": "ImportDirective",
+        "scope": 23097,
+        "sourceUnit": 23007,
+        "src": "824:22:70",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 23090,
+              "name": "DSAuth",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 22706,
+              "src": "868:6:70",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_DSAuth_$22706",
+                "typeString": "contract DSAuth"
+              }
+            },
+            "id": 23091,
+            "nodeType": "InheritanceSpecifier",
+            "src": "868:6:70"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 23092,
+              "name": "DSNote",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 23047,
+              "src": "876:6:70",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_DSNote_$23047",
+                "typeString": "contract DSNote"
+              }
+            },
+            "id": 23093,
+            "nodeType": "InheritanceSpecifier",
+            "src": "876:6:70"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 23094,
+              "name": "DSMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 23006,
+              "src": "884:6:70",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_DSMath_$23006",
+                "typeString": "contract DSMath"
+              }
+            },
+            "id": 23095,
+            "nodeType": "InheritanceSpecifier",
+            "src": "884:6:70"
+          }
+        ],
+        "contractDependencies": [
+          22592,
+          22706,
+          23006,
+          23047
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 23096,
+        "linearizedBaseContracts": [
+          23096,
+          23006,
+          23047,
+          22706,
+          22592
+        ],
+        "name": "DSThing",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 23097,
+        "src": "848:51:70"
+      }
+    ],
+    "src": "753:147:70"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang",
+    "optimizer": true,
+    "runs": 200
+  },
+  "networks": {},
+  "schemaVersion": "2.2.4",
+  "updatedAt": "2020-02-29T16:28:22.629Z"
+}

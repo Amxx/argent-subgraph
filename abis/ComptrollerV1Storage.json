@@ -1,0 +1,907 @@
+{
+  "contractName": "ComptrollerV1Storage",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "pendingAdmin",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "liquidationIncentiveMantissa",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "oracle",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxAssets",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "comptrollerImplementation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "accountAssets",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "pendingComptrollerImplementation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "closeFactorMantissa",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5061020f806100206000396000f3fe608060405234801561001057600080fd5b50600436106100b0576000357c010000000000000000000000000000000000000000000000000000000090048063bb82aa5e11610083578063bb82aa5e14610103578063dce154491461010b578063dcfbc0c714610137578063e87554461461013f578063f851a44014610147576100b0565b806326782247146100b55780634ada90af146100d95780637dc0d1d0146100f357806394b2294b146100fb575b600080fd5b6100bd61014f565b60408051600160a060020a039092168252519081900360200190f35b6100e161015e565b60408051918252519081900360200190f35b6100bd610164565b6100e1610173565b6100bd610179565b6100bd6004803603604081101561012157600080fd5b50600160a060020a038135169060200135610188565b6100bd6101bf565b6100e16101ce565b6100bd6101d4565b600154600160a060020a031681565b60065481565b600454600160a060020a031681565b60075481565b600254600160a060020a031681565b6008602052816000526040600020818154811015156101a357fe5b600091825260209091200154600160a060020a03169150829050565b600354600160a060020a031681565b60055481565b600054600160a060020a03168156fea165627a7a723058206c9c576f3e66460905fa3e4d23114daa7f6c240aece3e4ab6c11191c784c53330029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100b0576000357c010000000000000000000000000000000000000000000000000000000090048063bb82aa5e11610083578063bb82aa5e14610103578063dce154491461010b578063dcfbc0c714610137578063e87554461461013f578063f851a44014610147576100b0565b806326782247146100b55780634ada90af146100d95780637dc0d1d0146100f357806394b2294b146100fb575b600080fd5b6100bd61014f565b60408051600160a060020a039092168252519081900360200190f35b6100e161015e565b60408051918252519081900360200190f35b6100bd610164565b6100e1610173565b6100bd610179565b6100bd6004803603604081101561012157600080fd5b50600160a060020a038135169060200135610188565b6100bd6101bf565b6100e16101ce565b6100bd6101d4565b600154600160a060020a031681565b60065481565b600454600160a060020a031681565b60075481565b600254600160a060020a031681565b6008602052816000526040600020818154811015156101a357fe5b600091825260209091200154600160a060020a03169150829050565b600354600160a060020a031681565b60055481565b600054600160a060020a03168156fea165627a7a723058206c9c576f3e66460905fa3e4d23114daa7f6c240aece3e4ab6c11191c784c53330029",
+  "sourceMap": "520:772:53:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;520:772:53;;;;;;;",
+  "deployedSourceMap": "520:772:53:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;520:772:53;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;272:27;;;:::i;:::-;;;;-1:-1:-1;;;;;272:27:53;;;;;;;;;;;;;;951:40;;;:::i;:::-;;;;;;;;;;;;;;;;662:25;;;:::i;1116:21::-;;;:::i;363:40::-;;;:::i;1239:49::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;;1239:49:53;;;;;;;;:::i;468:47::-;;;:::i;804:31::-;;;:::i;176:20::-;;;:::i;272:27::-;;;-1:-1:-1;;;;;272:27:53;;:::o;951:40::-;;;;:::o;662:25::-;;;-1:-1:-1;;;;;662:25:53;;:::o;1116:21::-;;;;:::o;363:40::-;;;-1:-1:-1;;;;;363:40:53;;:::o;1239:49::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1239:49:53;;-1:-1:-1;1239:49:53;;-1:-1:-1;1239:49:53:o;468:47::-;;;-1:-1:-1;;;;;468:47:53;;:::o;804:31::-;;;;:::o;176:20::-;;;-1:-1:-1;;;;;176:20:53;;:::o",
+  "source": "pragma solidity ^0.5.4;\n\nimport \"./CToken.sol\";\nimport \"./PriceOracle.sol\";\n\ncontract UnitrollerAdminStorage {\n    /**\n    * @notice Administrator for this contract\n    */\n    address public admin;\n\n    /**\n    * @notice Pending administrator for this contract\n    */\n    address public pendingAdmin;\n\n    /**\n    * @notice Active brains of Unitroller\n    */\n    address public comptrollerImplementation;\n\n    /**\n    * @notice Pending brains of Unitroller\n    */\n    address public pendingComptrollerImplementation;\n}\n\ncontract ComptrollerV1Storage is UnitrollerAdminStorage {\n\n    /**\n     * @notice Oracle which gives the price of any given asset\n     */\n    PriceOracle public oracle;\n\n    /**\n     * @notice Multiplier used to calculate the maximum repayAmount when liquidating a borrow\n     */\n    uint public closeFactorMantissa;\n\n    /**\n     * @notice Multiplier representing the discount on collateral that a liquidator receives\n     */\n    uint public liquidationIncentiveMantissa;\n\n    /**\n     * @notice Max number of assets a single account can participate in (borrow or use as collateral)\n     */\n    uint public maxAssets;\n\n    /**\n     * @notice Per-account mapping of \"assets you are in\", capped by maxAssets\n     */\n    mapping(address => CToken[]) public accountAssets;\n\n}\n",
+  "sourcePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/ComptrollerStorage.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/ComptrollerStorage.sol",
+    "exportedSymbols": {
+      "ComptrollerV1Storage": [
+        20726
+      ],
+      "UnitrollerAdminStorage": [
+        20710
+      ]
+    },
+    "id": 20727,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 20699,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:53"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/CToken.sol",
+        "file": "./CToken.sol",
+        "id": 20700,
+        "nodeType": "ImportDirective",
+        "scope": 20727,
+        "sourceUnit": 18108,
+        "src": "25:22:53",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/PriceOracle.sol",
+        "file": "./PriceOracle.sol",
+        "id": 20701,
+        "nodeType": "ImportDirective",
+        "scope": 20727,
+        "sourceUnit": 21829,
+        "src": "48:27:53",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 20710,
+        "linearizedBaseContracts": [
+          20710
+        ],
+        "name": "UnitrollerAdminStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 20703,
+            "name": "admin",
+            "nodeType": "VariableDeclaration",
+            "scope": 20710,
+            "src": "176:20:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 20702,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "176:7:53",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20705,
+            "name": "pendingAdmin",
+            "nodeType": "VariableDeclaration",
+            "scope": 20710,
+            "src": "272:27:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 20704,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "272:7:53",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20707,
+            "name": "comptrollerImplementation",
+            "nodeType": "VariableDeclaration",
+            "scope": 20710,
+            "src": "363:40:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 20706,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "363:7:53",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20709,
+            "name": "pendingComptrollerImplementation",
+            "nodeType": "VariableDeclaration",
+            "scope": 20710,
+            "src": "468:47:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 20708,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "468:7:53",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 20727,
+        "src": "77:441:53"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 20711,
+              "name": "UnitrollerAdminStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 20710,
+              "src": "553:22:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_UnitrollerAdminStorage_$20710",
+                "typeString": "contract UnitrollerAdminStorage"
+              }
+            },
+            "id": 20712,
+            "nodeType": "InheritanceSpecifier",
+            "src": "553:22:53"
+          }
+        ],
+        "contractDependencies": [
+          20710
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 20726,
+        "linearizedBaseContracts": [
+          20726,
+          20710
+        ],
+        "name": "ComptrollerV1Storage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 20714,
+            "name": "oracle",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "662:25:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_PriceOracle_$21828",
+              "typeString": "contract PriceOracle"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20713,
+              "name": "PriceOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 21828,
+              "src": "662:11:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PriceOracle_$21828",
+                "typeString": "contract PriceOracle"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20716,
+            "name": "closeFactorMantissa",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "804:31:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 20715,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "804:4:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20718,
+            "name": "liquidationIncentiveMantissa",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "951:40:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 20717,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "951:4:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20720,
+            "name": "maxAssets",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "1116:21:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 20719,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "1116:4:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20725,
+            "name": "accountAssets",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "1239:49:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_contract$_CToken_$18107_$dyn_storage_$",
+              "typeString": "mapping(address => contract CToken[])"
+            },
+            "typeName": {
+              "id": 20724,
+              "keyType": {
+                "id": 20721,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "1247:7:53",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1239:28:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_contract$_CToken_$18107_$dyn_storage_$",
+                "typeString": "mapping(address => contract CToken[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 20722,
+                  "name": "CToken",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 18107,
+                  "src": "1258:6:53",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_CToken_$18107",
+                    "typeString": "contract CToken"
+                  }
+                },
+                "id": 20723,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "1258:8:53",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_contract$_CToken_$18107_$dyn_storage_ptr",
+                  "typeString": "contract CToken[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 20727,
+        "src": "520:772:53"
+      }
+    ],
+    "src": "0:1293:53"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/ComptrollerStorage.sol",
+    "exportedSymbols": {
+      "ComptrollerV1Storage": [
+        20726
+      ],
+      "UnitrollerAdminStorage": [
+        20710
+      ]
+    },
+    "id": 20727,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 20699,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:53"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/CToken.sol",
+        "file": "./CToken.sol",
+        "id": 20700,
+        "nodeType": "ImportDirective",
+        "scope": 20727,
+        "sourceUnit": 18108,
+        "src": "25:22:53",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/PriceOracle.sol",
+        "file": "./PriceOracle.sol",
+        "id": 20701,
+        "nodeType": "ImportDirective",
+        "scope": 20727,
+        "sourceUnit": 21829,
+        "src": "48:27:53",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 20710,
+        "linearizedBaseContracts": [
+          20710
+        ],
+        "name": "UnitrollerAdminStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 20703,
+            "name": "admin",
+            "nodeType": "VariableDeclaration",
+            "scope": 20710,
+            "src": "176:20:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 20702,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "176:7:53",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20705,
+            "name": "pendingAdmin",
+            "nodeType": "VariableDeclaration",
+            "scope": 20710,
+            "src": "272:27:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 20704,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "272:7:53",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20707,
+            "name": "comptrollerImplementation",
+            "nodeType": "VariableDeclaration",
+            "scope": 20710,
+            "src": "363:40:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 20706,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "363:7:53",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20709,
+            "name": "pendingComptrollerImplementation",
+            "nodeType": "VariableDeclaration",
+            "scope": 20710,
+            "src": "468:47:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 20708,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "468:7:53",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 20727,
+        "src": "77:441:53"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 20711,
+              "name": "UnitrollerAdminStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 20710,
+              "src": "553:22:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_UnitrollerAdminStorage_$20710",
+                "typeString": "contract UnitrollerAdminStorage"
+              }
+            },
+            "id": 20712,
+            "nodeType": "InheritanceSpecifier",
+            "src": "553:22:53"
+          }
+        ],
+        "contractDependencies": [
+          20710
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 20726,
+        "linearizedBaseContracts": [
+          20726,
+          20710
+        ],
+        "name": "ComptrollerV1Storage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 20714,
+            "name": "oracle",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "662:25:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_PriceOracle_$21828",
+              "typeString": "contract PriceOracle"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20713,
+              "name": "PriceOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 21828,
+              "src": "662:11:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PriceOracle_$21828",
+                "typeString": "contract PriceOracle"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20716,
+            "name": "closeFactorMantissa",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "804:31:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 20715,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "804:4:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20718,
+            "name": "liquidationIncentiveMantissa",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "951:40:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 20717,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "951:4:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20720,
+            "name": "maxAssets",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "1116:21:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 20719,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "1116:4:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 20725,
+            "name": "accountAssets",
+            "nodeType": "VariableDeclaration",
+            "scope": 20726,
+            "src": "1239:49:53",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_contract$_CToken_$18107_$dyn_storage_$",
+              "typeString": "mapping(address => contract CToken[])"
+            },
+            "typeName": {
+              "id": 20724,
+              "keyType": {
+                "id": 20721,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "1247:7:53",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1239:28:53",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_contract$_CToken_$18107_$dyn_storage_$",
+                "typeString": "mapping(address => contract CToken[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 20722,
+                  "name": "CToken",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 18107,
+                  "src": "1258:6:53",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_CToken_$18107",
+                    "typeString": "contract CToken"
+                  }
+                },
+                "id": 20723,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "1258:8:53",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_contract$_CToken_$18107_$dyn_storage_ptr",
+                  "typeString": "contract CToken[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 20727,
+        "src": "520:772:53"
+      }
+    ],
+    "src": "0:1293:53"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang",
+    "optimizer": true,
+    "runs": 200
+  },
+  "networks": {},
+  "schemaVersion": "2.2.4",
+  "updatedAt": "2020-02-29T16:28:22.620Z"
+}

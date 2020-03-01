@@ -1,0 +1,560 @@
+{
+  "contractName": "Module",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        }
+      ],
+      "name": "init",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        },
+        {
+          "name": "_module",
+          "type": "address"
+        }
+      ],
+      "name": "addModule",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_token",
+          "type": "address"
+        }
+      ],
+      "name": "recoverToken",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.4;\nimport \"../wallet/BaseWallet.sol\";\n\n/**\n * @title Module\n * @dev Interface for a module.\n * A module MUST implement the addModule() method to ensure that a wallet with at least one module\n * can never end up in a \"frozen\" state.\n * @author Julien Niset - <julien@argent.xyz>\n */\ninterface Module {\n\n    /**\n     * @dev Inits a module for a wallet by e.g. setting some wallet specific parameters in storage.\n     * @param _wallet The wallet.\n     */\n    function init(BaseWallet _wallet) external;\n\n    /**\n     * @dev Adds a module to a wallet.\n     * @param _wallet The target wallet.\n     * @param _module The modules to authorise.\n     */\n    function addModule(BaseWallet _wallet, Module _module) external;\n\n    /**\n    * @dev Utility method to recover any ERC20 token that was sent to the\n    * module by mistake.\n    * @param _token The token to recover.\n    */\n    function recoverToken(address _token) external;\n}",
+  "sourcePath": "/home/amxx/Work/Argent/argent-contracts/contracts/interfaces/Module.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/interfaces/Module.sol",
+    "exportedSymbols": {
+      "Module": [
+        2135
+      ]
+    },
+    "id": 2136,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2116,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:15"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/wallet/BaseWallet.sol",
+        "file": "../wallet/BaseWallet.sol",
+        "id": 2117,
+        "nodeType": "ImportDirective",
+        "scope": 2136,
+        "sourceUnit": 29801,
+        "src": "24:34:15",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title Module\n@dev Interface for a module.\nA module MUST implement the addModule() method to ensure that a wallet with at least one module\ncan never end up in a \"frozen\" state.\n@author Julien Niset - <julien@argent.xyz>",
+        "fullyImplemented": false,
+        "id": 2135,
+        "linearizedBaseContracts": [
+          2135
+        ],
+        "name": "Module",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Inits a module for a wallet by e.g. setting some wallet specific parameters in storage.\n@param _wallet The wallet.",
+            "id": 2122,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "init",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2120,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2119,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2122,
+                  "src": "491:18:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2118,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "491:10:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "490:20:15"
+            },
+            "returnParameters": {
+              "id": 2121,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "519:0:15"
+            },
+            "scope": 2135,
+            "src": "477:43:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Adds a module to a wallet.\n@param _wallet The target wallet.\n@param _module The modules to authorise.",
+            "id": 2129,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addModule",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2127,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2124,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2129,
+                  "src": "689:18:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2123,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "689:10:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2126,
+                  "name": "_module",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2129,
+                  "src": "709:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Module_$2135",
+                    "typeString": "contract Module"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2125,
+                    "name": "Module",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 2135,
+                    "src": "709:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Module_$2135",
+                      "typeString": "contract Module"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "688:36:15"
+            },
+            "returnParameters": {
+              "id": 2128,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "733:0:15"
+            },
+            "scope": 2135,
+            "src": "670:64:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Utility method to recover any ERC20 token that was sent to the\nmodule by mistake.\n@param _token The token to recover.",
+            "id": 2134,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "recoverToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2132,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2131,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2134,
+                  "src": "918:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2130,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "918:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "917:16:15"
+            },
+            "returnParameters": {
+              "id": 2133,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "942:0:15"
+            },
+            "scope": 2135,
+            "src": "896:47:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2136,
+        "src": "303:642:15"
+      }
+    ],
+    "src": "0:945:15"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/interfaces/Module.sol",
+    "exportedSymbols": {
+      "Module": [
+        2135
+      ]
+    },
+    "id": 2136,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2116,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:15"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/wallet/BaseWallet.sol",
+        "file": "../wallet/BaseWallet.sol",
+        "id": 2117,
+        "nodeType": "ImportDirective",
+        "scope": 2136,
+        "sourceUnit": 29801,
+        "src": "24:34:15",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title Module\n@dev Interface for a module.\nA module MUST implement the addModule() method to ensure that a wallet with at least one module\ncan never end up in a \"frozen\" state.\n@author Julien Niset - <julien@argent.xyz>",
+        "fullyImplemented": false,
+        "id": 2135,
+        "linearizedBaseContracts": [
+          2135
+        ],
+        "name": "Module",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Inits a module for a wallet by e.g. setting some wallet specific parameters in storage.\n@param _wallet The wallet.",
+            "id": 2122,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "init",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2120,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2119,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2122,
+                  "src": "491:18:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2118,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "491:10:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "490:20:15"
+            },
+            "returnParameters": {
+              "id": 2121,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "519:0:15"
+            },
+            "scope": 2135,
+            "src": "477:43:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Adds a module to a wallet.\n@param _wallet The target wallet.\n@param _module The modules to authorise.",
+            "id": 2129,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addModule",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2127,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2124,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2129,
+                  "src": "689:18:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2123,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "689:10:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2126,
+                  "name": "_module",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2129,
+                  "src": "709:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Module_$2135",
+                    "typeString": "contract Module"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2125,
+                    "name": "Module",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 2135,
+                    "src": "709:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Module_$2135",
+                      "typeString": "contract Module"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "688:36:15"
+            },
+            "returnParameters": {
+              "id": 2128,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "733:0:15"
+            },
+            "scope": 2135,
+            "src": "670:64:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Utility method to recover any ERC20 token that was sent to the\nmodule by mistake.\n@param _token The token to recover.",
+            "id": 2134,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "recoverToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2132,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2131,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2134,
+                  "src": "918:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2130,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "918:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "917:16:15"
+            },
+            "returnParameters": {
+              "id": 2133,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "942:0:15"
+            },
+            "scope": 2135,
+            "src": "896:47:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2136,
+        "src": "303:642:15"
+      }
+    ],
+    "src": "0:945:15"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang",
+    "optimizer": true,
+    "runs": 200
+  },
+  "networks": {},
+  "schemaVersion": "2.2.4",
+  "updatedAt": "2020-02-29T16:28:22.460Z"
+}

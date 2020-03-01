@@ -1,0 +1,2939 @@
+{
+  "contractName": "OnlyOwnerModule",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        }
+      ],
+      "name": "init",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        }
+      ],
+      "name": "getNonce",
+      "outputs": [
+        {
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_token",
+          "type": "address"
+        }
+      ],
+      "name": "recoverToken",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        },
+        {
+          "name": "_data",
+          "type": "bytes"
+        },
+        {
+          "name": "_nonce",
+          "type": "uint256"
+        },
+        {
+          "name": "_signatures",
+          "type": "bytes"
+        },
+        {
+          "name": "_gasPrice",
+          "type": "uint256"
+        },
+        {
+          "name": "_gasLimit",
+          "type": "uint256"
+        }
+      ],
+      "name": "execute",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "relayer",
+      "outputs": [
+        {
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "wallet",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "success",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "name": "signedHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TransactionExecuted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "name",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ModuleCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "wallet",
+          "type": "address"
+        }
+      ],
+      "name": "ModuleInitialised",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "isOnlyOwnerModule",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        },
+        {
+          "name": "_module",
+          "type": "address"
+        }
+      ],
+      "name": "addModule",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.4;\nimport \"./BaseModule.sol\";\nimport \"./RelayerModule.sol\";\nimport \"../../wallet/BaseWallet.sol\";\n\n/**\n * @title OnlyOwnerModule\n * @dev Module that extends BaseModule and RelayerModule for modules where the execute() method\n * must be called with one signature frm the owner.\n * @author Julien Niset - <julien@argent.im>\n */\ncontract OnlyOwnerModule is BaseModule, RelayerModule {\n\n    // bytes4 private constant IS_ONLY_OWNER_MODULE = bytes4(keccak256(\"isOnlyOwnerModule()\"));\n\n   /**\n    * @dev Returns a constant that indicates that the module is an OnlyOwnerModule.\n    * @return The constant bytes4(keccak256(\"isOnlyOwnerModule()\"))\n    */\n    function isOnlyOwnerModule() external pure returns (bytes4) {\n        // return IS_ONLY_OWNER_MODULE;\n        return this.isOnlyOwnerModule.selector;\n    }\n\n    /**\n     * @dev Adds a module to a wallet. First checks that the module is registered.\n     * Unlike its overrided parent, this method can be called via the RelayerModule's execute()\n     * @param _wallet The target wallet.\n     * @param _module The modules to authorise.\n     */\n    function addModule(BaseWallet _wallet, Module _module) external onlyWalletOwner(_wallet) {\n        require(registry.isRegisteredModule(address(_module)), \"BM: module is not registered\");\n        _wallet.authoriseModule(address(_module), true);\n    }\n\n    // *************** Implementation of RelayerModule methods ********************* //\n\n    // Overrides to use the incremental nonce and save some gas\n    function checkAndUpdateUniqueness(BaseWallet _wallet, uint256 _nonce, bytes32 /* _signHash */) internal returns (bool) {\n        return checkAndUpdateNonce(_wallet, _nonce);\n    }\n\n    function validateSignatures(\n        BaseWallet _wallet,\n        bytes memory /* _data */,\n        bytes32 _signHash,\n        bytes memory _signatures\n    )\n        internal\n        view\n        returns (bool)\n    {\n        address signer = recoverSigner(_signHash, _signatures, 0);\n        return isOwner(_wallet, signer); // \"OOM: signer must be owner\"\n    }\n\n    function getRequiredSignatures(BaseWallet /* _wallet */, bytes memory /* _data */) internal view returns (uint256) {\n        return 1;\n    }\n}",
+  "sourcePath": "/home/amxx/Work/Argent/argent-contracts/contracts/modules/common/OnlyOwnerModule.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/modules/common/OnlyOwnerModule.sol",
+    "exportedSymbols": {
+      "OnlyOwnerModule": [
+        10802
+      ]
+    },
+    "id": 10803,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 10698,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:30"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/modules/common/BaseModule.sol",
+        "file": "./BaseModule.sol",
+        "id": 10699,
+        "nodeType": "ImportDirective",
+        "scope": 10803,
+        "sourceUnit": 10006,
+        "src": "24:26:30",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/modules/common/RelayerModule.sol",
+        "file": "./RelayerModule.sol",
+        "id": 10700,
+        "nodeType": "ImportDirective",
+        "scope": 10803,
+        "sourceUnit": 11337,
+        "src": "51:29:30",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/wallet/BaseWallet.sol",
+        "file": "../../wallet/BaseWallet.sol",
+        "id": 10701,
+        "nodeType": "ImportDirective",
+        "scope": 10803,
+        "sourceUnit": 29801,
+        "src": "81:37:30",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10702,
+              "name": "BaseModule",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10005,
+              "src": "375:10:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BaseModule_$10005",
+                "typeString": "contract BaseModule"
+              }
+            },
+            "id": 10703,
+            "nodeType": "InheritanceSpecifier",
+            "src": "375:10:30"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10704,
+              "name": "RelayerModule",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11336,
+              "src": "387:13:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_RelayerModule_$11336",
+                "typeString": "contract RelayerModule"
+              }
+            },
+            "id": 10705,
+            "nodeType": "InheritanceSpecifier",
+            "src": "387:13:30"
+          }
+        ],
+        "contractDependencies": [
+          2135,
+          10005,
+          11336
+        ],
+        "contractKind": "contract",
+        "documentation": "@title OnlyOwnerModule\n@dev Module that extends BaseModule and RelayerModule for modules where the execute() method\nmust be called with one signature frm the owner.\n@author Julien Niset - <julien@argent.im>",
+        "fullyImplemented": false,
+        "id": 10802,
+        "linearizedBaseContracts": [
+          10802,
+          11336,
+          10005,
+          2135
+        ],
+        "name": "OnlyOwnerModule",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 10714,
+              "nodeType": "Block",
+              "src": "731:95:30",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 10710,
+                        "name": "this",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32473,
+                        "src": "788:4:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_OnlyOwnerModule_$10802",
+                          "typeString": "contract OnlyOwnerModule"
+                        }
+                      },
+                      "id": 10711,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "isOnlyOwnerModule",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 10715,
+                      "src": "788:22:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_pure$__$returns$_t_bytes4_$",
+                        "typeString": "function () pure external returns (bytes4)"
+                      }
+                    },
+                    "id": 10712,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "selector",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "788:31:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "functionReturnParameters": 10709,
+                  "id": 10713,
+                  "nodeType": "Return",
+                  "src": "781:38:30"
+                }
+              ]
+            },
+            "documentation": "@dev Returns a constant that indicates that the module is an OnlyOwnerModule.\n@return The constant bytes4(keccak256(\"isOnlyOwnerModule()\"))",
+            "id": 10715,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isOnlyOwnerModule",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10706,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "697:2:30"
+            },
+            "returnParameters": {
+              "id": 10709,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10708,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10715,
+                  "src": "723:6:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 10707,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "723:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "722:8:30"
+            },
+            "scope": 10802,
+            "src": "671:155:30",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 10744,
+              "nodeType": "Block",
+              "src": "1205:160:30",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 10729,
+                                "name": "_module",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 10719,
+                                "src": "1259:7:30",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Module_$2135",
+                                  "typeString": "contract Module"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Module_$2135",
+                                  "typeString": "contract Module"
+                                }
+                              ],
+                              "id": 10728,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1251:7:30",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 10730,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1251:16:30",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 10726,
+                            "name": "registry",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 9751,
+                            "src": "1223:8:30",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ModuleRegistry_$27198",
+                              "typeString": "contract ModuleRegistry"
+                            }
+                          },
+                          "id": 10727,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "isRegisteredModule",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 27149,
+                          "src": "1223:27:30",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address) view external returns (bool)"
+                          }
+                        },
+                        "id": 10731,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1223:45:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "424d3a206d6f64756c65206973206e6f742072656769737465726564",
+                        "id": 10732,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1270:30:30",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c23292e45e570ad6918d075167fd093737332b33291605ddef23ab637447ce2c",
+                          "typeString": "literal_string \"BM: module is not registered\""
+                        },
+                        "value": "BM: module is not registered"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c23292e45e570ad6918d075167fd093737332b33291605ddef23ab637447ce2c",
+                          "typeString": "literal_string \"BM: module is not registered\""
+                        }
+                      ],
+                      "id": 10725,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        32402,
+                        32403
+                      ],
+                      "referencedDeclaration": 32403,
+                      "src": "1215:7:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 10733,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1215:86:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 10734,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1215:86:30"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 10739,
+                            "name": "_module",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 10719,
+                            "src": "1343:7:30",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Module_$2135",
+                              "typeString": "contract Module"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Module_$2135",
+                              "typeString": "contract Module"
+                            }
+                          ],
+                          "id": 10738,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1335:7:30",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 10740,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1335:16:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "74727565",
+                        "id": 10741,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "bool",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1353:4:30",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "value": "true"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 10735,
+                        "name": "_wallet",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10717,
+                        "src": "1311:7:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        }
+                      },
+                      "id": 10737,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "authoriseModule",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 29661,
+                      "src": "1311:23:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_bool_$returns$__$",
+                        "typeString": "function (address,bool) external"
+                      }
+                    },
+                    "id": 10742,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1311:47:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 10743,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1311:47:30"
+                }
+              ]
+            },
+            "documentation": "@dev Adds a module to a wallet. First checks that the module is registered.\nUnlike its overrided parent, this method can be called via the RelayerModule's execute()\n@param _wallet The target wallet.\n@param _module The modules to authorise.",
+            "id": 10745,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 10722,
+                    "name": "_wallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 10717,
+                    "src": "1196:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  }
+                ],
+                "id": 10723,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 10721,
+                  "name": "onlyWalletOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 9836,
+                  "src": "1180:15:30",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_contract$_BaseWallet_$29800_$",
+                    "typeString": "modifier (contract BaseWallet)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1180:24:30"
+              }
+            ],
+            "name": "addModule",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10720,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10717,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10745,
+                  "src": "1135:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10716,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1135:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10719,
+                  "name": "_module",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10745,
+                  "src": "1155:14:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Module_$2135",
+                    "typeString": "contract Module"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10718,
+                    "name": "Module",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 2135,
+                    "src": "1155:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Module_$2135",
+                      "typeString": "contract Module"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1134:36:30"
+            },
+            "returnParameters": {
+              "id": 10724,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1205:0:30"
+            },
+            "scope": 10802,
+            "src": "1116:249:30",
+            "stateMutability": "nonpayable",
+            "superFunction": 9896,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 10761,
+              "nodeType": "Block",
+              "src": "1643:60:30",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10757,
+                        "name": "_wallet",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10747,
+                        "src": "1680:7:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 10758,
+                        "name": "_nonce",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10749,
+                        "src": "1689:6:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 10756,
+                      "name": "checkAndUpdateNonce",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11143,
+                      "src": "1660:19:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_contract$_BaseWallet_$29800_$_t_uint256_$returns$_t_bool_$",
+                        "typeString": "function (contract BaseWallet,uint256) returns (bool)"
+                      }
+                    },
+                    "id": 10759,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1660:36:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 10755,
+                  "id": 10760,
+                  "nodeType": "Return",
+                  "src": "1653:43:30"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10762,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "checkAndUpdateUniqueness",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10752,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10747,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10762,
+                  "src": "1558:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10746,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1558:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10749,
+                  "name": "_nonce",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10762,
+                  "src": "1578:14:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 10748,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1578:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10751,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10762,
+                  "src": "1594:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 10750,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1594:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1557:61:30"
+            },
+            "returnParameters": {
+              "id": 10755,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10754,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10762,
+                  "src": "1637:4:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10753,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1637:4:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1636:6:30"
+            },
+            "scope": 10802,
+            "src": "1524:179:30",
+            "stateMutability": "nonpayable",
+            "superFunction": 11091,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 10788,
+              "nodeType": "Block",
+              "src": "1923:146:30",
+              "statements": [
+                {
+                  "assignments": [
+                    10776
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 10776,
+                      "name": "signer",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 10788,
+                      "src": "1933:14:30",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 10775,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1933:7:30",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 10782,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10778,
+                        "name": "_signHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10768,
+                        "src": "1964:9:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 10779,
+                        "name": "_signatures",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10770,
+                        "src": "1975:11:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "30",
+                        "id": 10780,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1988:1:30",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        },
+                        "value": "0"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        }
+                      ],
+                      "id": 10777,
+                      "name": "recoverSigner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11182,
+                      "src": "1950:13:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_bytes_memory_ptr_$_t_uint256_$returns$_t_address_$",
+                        "typeString": "function (bytes32,bytes memory,uint256) pure returns (address)"
+                      }
+                    },
+                    "id": 10781,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1950:40:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1933:57:30"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10784,
+                        "name": "_wallet",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10764,
+                        "src": "2015:7:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 10785,
+                        "name": "signer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10776,
+                        "src": "2024:6:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 10783,
+                      "name": "isOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 9939,
+                      "src": "2007:7:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_BaseWallet_$29800_$_t_address_$returns$_t_bool_$",
+                        "typeString": "function (contract BaseWallet,address) view returns (bool)"
+                      }
+                    },
+                    "id": 10786,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2007:24:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 10774,
+                  "id": 10787,
+                  "nodeType": "Return",
+                  "src": "2000:31:30"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10789,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "validateSignatures",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10771,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10764,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1746:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10763,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1746:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10766,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1774:12:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 10765,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1774:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10768,
+                  "name": "_signHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1808:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 10767,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1808:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10770,
+                  "name": "_signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1835:24:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 10769,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1835:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1736:129:30"
+            },
+            "returnParameters": {
+              "id": 10774,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10773,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1913:4:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10772,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1913:4:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1912:6:30"
+            },
+            "scope": 10802,
+            "src": "1709:360:30",
+            "stateMutability": "view",
+            "superFunction": 10867,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 10800,
+              "nodeType": "Block",
+              "src": "2190:25:30",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "31",
+                    "id": 10798,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "2207:1:30",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1_by_1",
+                      "typeString": "int_const 1"
+                    },
+                    "value": "1"
+                  },
+                  "functionReturnParameters": 10797,
+                  "id": 10799,
+                  "nodeType": "Return",
+                  "src": "2200:8:30"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10801,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getRequiredSignatures",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10794,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10791,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10801,
+                  "src": "2106:10:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10790,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "2106:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10793,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10801,
+                  "src": "2132:12:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 10792,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2132:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2105:52:30"
+            },
+            "returnParameters": {
+              "id": 10797,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10796,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10801,
+                  "src": "2181:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 10795,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2181:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2180:9:30"
+            },
+            "scope": 10802,
+            "src": "2075:140:30",
+            "stateMutability": "view",
+            "superFunction": 10854,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 10803,
+        "src": "347:1870:30"
+      }
+    ],
+    "src": "0:2217:30"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/modules/common/OnlyOwnerModule.sol",
+    "exportedSymbols": {
+      "OnlyOwnerModule": [
+        10802
+      ]
+    },
+    "id": 10803,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 10698,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:30"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/modules/common/BaseModule.sol",
+        "file": "./BaseModule.sol",
+        "id": 10699,
+        "nodeType": "ImportDirective",
+        "scope": 10803,
+        "sourceUnit": 10006,
+        "src": "24:26:30",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/modules/common/RelayerModule.sol",
+        "file": "./RelayerModule.sol",
+        "id": 10700,
+        "nodeType": "ImportDirective",
+        "scope": 10803,
+        "sourceUnit": 11337,
+        "src": "51:29:30",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/wallet/BaseWallet.sol",
+        "file": "../../wallet/BaseWallet.sol",
+        "id": 10701,
+        "nodeType": "ImportDirective",
+        "scope": 10803,
+        "sourceUnit": 29801,
+        "src": "81:37:30",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10702,
+              "name": "BaseModule",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10005,
+              "src": "375:10:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BaseModule_$10005",
+                "typeString": "contract BaseModule"
+              }
+            },
+            "id": 10703,
+            "nodeType": "InheritanceSpecifier",
+            "src": "375:10:30"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10704,
+              "name": "RelayerModule",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11336,
+              "src": "387:13:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_RelayerModule_$11336",
+                "typeString": "contract RelayerModule"
+              }
+            },
+            "id": 10705,
+            "nodeType": "InheritanceSpecifier",
+            "src": "387:13:30"
+          }
+        ],
+        "contractDependencies": [
+          2135,
+          10005,
+          11336
+        ],
+        "contractKind": "contract",
+        "documentation": "@title OnlyOwnerModule\n@dev Module that extends BaseModule and RelayerModule for modules where the execute() method\nmust be called with one signature frm the owner.\n@author Julien Niset - <julien@argent.im>",
+        "fullyImplemented": false,
+        "id": 10802,
+        "linearizedBaseContracts": [
+          10802,
+          11336,
+          10005,
+          2135
+        ],
+        "name": "OnlyOwnerModule",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 10714,
+              "nodeType": "Block",
+              "src": "731:95:30",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 10710,
+                        "name": "this",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32473,
+                        "src": "788:4:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_OnlyOwnerModule_$10802",
+                          "typeString": "contract OnlyOwnerModule"
+                        }
+                      },
+                      "id": 10711,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "isOnlyOwnerModule",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 10715,
+                      "src": "788:22:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_pure$__$returns$_t_bytes4_$",
+                        "typeString": "function () pure external returns (bytes4)"
+                      }
+                    },
+                    "id": 10712,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "selector",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "788:31:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "functionReturnParameters": 10709,
+                  "id": 10713,
+                  "nodeType": "Return",
+                  "src": "781:38:30"
+                }
+              ]
+            },
+            "documentation": "@dev Returns a constant that indicates that the module is an OnlyOwnerModule.\n@return The constant bytes4(keccak256(\"isOnlyOwnerModule()\"))",
+            "id": 10715,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isOnlyOwnerModule",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10706,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "697:2:30"
+            },
+            "returnParameters": {
+              "id": 10709,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10708,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10715,
+                  "src": "723:6:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 10707,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "723:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "722:8:30"
+            },
+            "scope": 10802,
+            "src": "671:155:30",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 10744,
+              "nodeType": "Block",
+              "src": "1205:160:30",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 10729,
+                                "name": "_module",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 10719,
+                                "src": "1259:7:30",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Module_$2135",
+                                  "typeString": "contract Module"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Module_$2135",
+                                  "typeString": "contract Module"
+                                }
+                              ],
+                              "id": 10728,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1251:7:30",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 10730,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1251:16:30",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 10726,
+                            "name": "registry",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 9751,
+                            "src": "1223:8:30",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ModuleRegistry_$27198",
+                              "typeString": "contract ModuleRegistry"
+                            }
+                          },
+                          "id": 10727,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "isRegisteredModule",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 27149,
+                          "src": "1223:27:30",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address) view external returns (bool)"
+                          }
+                        },
+                        "id": 10731,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1223:45:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "424d3a206d6f64756c65206973206e6f742072656769737465726564",
+                        "id": 10732,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1270:30:30",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c23292e45e570ad6918d075167fd093737332b33291605ddef23ab637447ce2c",
+                          "typeString": "literal_string \"BM: module is not registered\""
+                        },
+                        "value": "BM: module is not registered"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c23292e45e570ad6918d075167fd093737332b33291605ddef23ab637447ce2c",
+                          "typeString": "literal_string \"BM: module is not registered\""
+                        }
+                      ],
+                      "id": 10725,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        32402,
+                        32403
+                      ],
+                      "referencedDeclaration": 32403,
+                      "src": "1215:7:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 10733,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1215:86:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 10734,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1215:86:30"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 10739,
+                            "name": "_module",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 10719,
+                            "src": "1343:7:30",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Module_$2135",
+                              "typeString": "contract Module"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Module_$2135",
+                              "typeString": "contract Module"
+                            }
+                          ],
+                          "id": 10738,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1335:7:30",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 10740,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1335:16:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "74727565",
+                        "id": 10741,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "bool",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1353:4:30",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "value": "true"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 10735,
+                        "name": "_wallet",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10717,
+                        "src": "1311:7:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        }
+                      },
+                      "id": 10737,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "authoriseModule",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 29661,
+                      "src": "1311:23:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_bool_$returns$__$",
+                        "typeString": "function (address,bool) external"
+                      }
+                    },
+                    "id": 10742,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1311:47:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 10743,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1311:47:30"
+                }
+              ]
+            },
+            "documentation": "@dev Adds a module to a wallet. First checks that the module is registered.\nUnlike its overrided parent, this method can be called via the RelayerModule's execute()\n@param _wallet The target wallet.\n@param _module The modules to authorise.",
+            "id": 10745,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 10722,
+                    "name": "_wallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 10717,
+                    "src": "1196:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  }
+                ],
+                "id": 10723,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 10721,
+                  "name": "onlyWalletOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 9836,
+                  "src": "1180:15:30",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_contract$_BaseWallet_$29800_$",
+                    "typeString": "modifier (contract BaseWallet)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1180:24:30"
+              }
+            ],
+            "name": "addModule",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10720,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10717,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10745,
+                  "src": "1135:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10716,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1135:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10719,
+                  "name": "_module",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10745,
+                  "src": "1155:14:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Module_$2135",
+                    "typeString": "contract Module"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10718,
+                    "name": "Module",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 2135,
+                    "src": "1155:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Module_$2135",
+                      "typeString": "contract Module"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1134:36:30"
+            },
+            "returnParameters": {
+              "id": 10724,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1205:0:30"
+            },
+            "scope": 10802,
+            "src": "1116:249:30",
+            "stateMutability": "nonpayable",
+            "superFunction": 9896,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 10761,
+              "nodeType": "Block",
+              "src": "1643:60:30",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10757,
+                        "name": "_wallet",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10747,
+                        "src": "1680:7:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 10758,
+                        "name": "_nonce",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10749,
+                        "src": "1689:6:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 10756,
+                      "name": "checkAndUpdateNonce",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11143,
+                      "src": "1660:19:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_contract$_BaseWallet_$29800_$_t_uint256_$returns$_t_bool_$",
+                        "typeString": "function (contract BaseWallet,uint256) returns (bool)"
+                      }
+                    },
+                    "id": 10759,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1660:36:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 10755,
+                  "id": 10760,
+                  "nodeType": "Return",
+                  "src": "1653:43:30"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10762,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "checkAndUpdateUniqueness",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10752,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10747,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10762,
+                  "src": "1558:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10746,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1558:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10749,
+                  "name": "_nonce",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10762,
+                  "src": "1578:14:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 10748,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1578:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10751,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10762,
+                  "src": "1594:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 10750,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1594:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1557:61:30"
+            },
+            "returnParameters": {
+              "id": 10755,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10754,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10762,
+                  "src": "1637:4:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10753,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1637:4:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1636:6:30"
+            },
+            "scope": 10802,
+            "src": "1524:179:30",
+            "stateMutability": "nonpayable",
+            "superFunction": 11091,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 10788,
+              "nodeType": "Block",
+              "src": "1923:146:30",
+              "statements": [
+                {
+                  "assignments": [
+                    10776
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 10776,
+                      "name": "signer",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 10788,
+                      "src": "1933:14:30",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 10775,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1933:7:30",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 10782,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10778,
+                        "name": "_signHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10768,
+                        "src": "1964:9:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 10779,
+                        "name": "_signatures",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10770,
+                        "src": "1975:11:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "30",
+                        "id": 10780,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1988:1:30",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        },
+                        "value": "0"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        }
+                      ],
+                      "id": 10777,
+                      "name": "recoverSigner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11182,
+                      "src": "1950:13:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_bytes_memory_ptr_$_t_uint256_$returns$_t_address_$",
+                        "typeString": "function (bytes32,bytes memory,uint256) pure returns (address)"
+                      }
+                    },
+                    "id": 10781,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1950:40:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1933:57:30"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10784,
+                        "name": "_wallet",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10764,
+                        "src": "2015:7:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 10785,
+                        "name": "signer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 10776,
+                        "src": "2024:6:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                          "typeString": "contract BaseWallet"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 10783,
+                      "name": "isOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 9939,
+                      "src": "2007:7:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_BaseWallet_$29800_$_t_address_$returns$_t_bool_$",
+                        "typeString": "function (contract BaseWallet,address) view returns (bool)"
+                      }
+                    },
+                    "id": 10786,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2007:24:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 10774,
+                  "id": 10787,
+                  "nodeType": "Return",
+                  "src": "2000:31:30"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10789,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "validateSignatures",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10771,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10764,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1746:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10763,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1746:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10766,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1774:12:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 10765,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1774:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10768,
+                  "name": "_signHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1808:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 10767,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1808:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10770,
+                  "name": "_signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1835:24:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 10769,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1835:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1736:129:30"
+            },
+            "returnParameters": {
+              "id": 10774,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10773,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10789,
+                  "src": "1913:4:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 10772,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1913:4:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1912:6:30"
+            },
+            "scope": 10802,
+            "src": "1709:360:30",
+            "stateMutability": "view",
+            "superFunction": 10867,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 10800,
+              "nodeType": "Block",
+              "src": "2190:25:30",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "31",
+                    "id": 10798,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "2207:1:30",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1_by_1",
+                      "typeString": "int_const 1"
+                    },
+                    "value": "1"
+                  },
+                  "functionReturnParameters": 10797,
+                  "id": 10799,
+                  "nodeType": "Return",
+                  "src": "2200:8:30"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 10801,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getRequiredSignatures",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10794,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10791,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10801,
+                  "src": "2106:10:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10790,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "2106:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 10793,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10801,
+                  "src": "2132:12:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 10792,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2132:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2105:52:30"
+            },
+            "returnParameters": {
+              "id": 10797,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10796,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10801,
+                  "src": "2181:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 10795,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2181:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2180:9:30"
+            },
+            "scope": 10802,
+            "src": "2075:140:30",
+            "stateMutability": "view",
+            "superFunction": 10854,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 10803,
+        "src": "347:1870:30"
+      }
+    ],
+    "src": "0:2217:30"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang",
+    "optimizer": true,
+    "runs": 200
+  },
+  "networks": {},
+  "schemaVersion": "2.2.4",
+  "updatedAt": "2020-02-29T16:28:22.571Z"
+}

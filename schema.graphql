@@ -1,0 +1,91 @@
+type Transaction @entity
+{
+	id:                           ID!
+	timestamp:                    BigInt!
+	blockNumber:                  BigInt!
+	events:                       [WalletEvent!]!     @derivedFrom(field: "transaction")
+}
+
+###############################################################################
+#                                  Protocol                                   #
+###############################################################################
+
+type Wallet @entity
+{
+	id:                           ID!
+	owner:                        String!
+	modules:                      [WalletModule!]!    @derivedFrom(field: "wallet")
+	staticcalls:                  [WalletMethod!]!    @derivedFrom(field: "wallet")
+	events:                       [WalletEvent!]!     @derivedFrom(field: "wallet")
+}
+
+type Module @entity
+{
+	id:                           ID!
+	wallets:                      [WalletModule!]!    @derivedFrom(field: "module")
+	staticcalls:                  [WalletMethod!]!    @derivedFrom(field: "module")
+}
+
+type Method @entity
+{
+	id:                           ID!
+	staticcalls:                  [WalletMethod!]!    @derivedFrom(field: "method")
+}
+
+type WalletModule @entity
+{
+	id:                           ID!
+	wallet:                       Wallet!
+	module:                       Module!
+}
+
+type WalletMethod @entity
+{
+	id:                           ID!
+	wallet:                       Wallet!
+	method:                       Method!
+	module:                       Module!
+}
+
+###############################################################################
+#                                   Events                                    #
+###############################################################################
+
+interface WalletEvent
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	wallet:                       Wallet!
+}
+
+type WalletCreated implements WalletEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	wallet:                       Wallet!
+}
+
+type WalletOwnerChange implements WalletEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	wallet:                       Wallet!
+}
+
+type WalletAuthorizeModule implements WalletEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	wallet:                       Wallet!
+	module:                       Module!
+	value:                        Boolean!
+}
+
+type WalletEnabledStaticCall implements WalletEvent @entity
+{
+	id:                           ID!
+	transaction:                  Transaction!
+	wallet:                       Wallet!
+	module:                       Module!
+	method:                       Method!
+}

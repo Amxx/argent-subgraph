@@ -1,0 +1,2307 @@
+{
+  "contractName": "DappStorage",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        },
+        {
+          "name": "_dapp",
+          "type": "address"
+        },
+        {
+          "name": "_contract",
+          "type": "address"
+        },
+        {
+          "name": "_signatures",
+          "type": "bytes4[]"
+        },
+        {
+          "name": "_authorized",
+          "type": "bool"
+        }
+      ],
+      "name": "setMethodAuthorization",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_wallet",
+          "type": "address"
+        },
+        {
+          "name": "_dapp",
+          "type": "address"
+        },
+        {
+          "name": "_contract",
+          "type": "address"
+        },
+        {
+          "name": "_signature",
+          "type": "bytes4"
+        }
+      ],
+      "name": "getMethodAuthorization",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506103e3806100206000396000f3fe608060405234801561001057600080fd5b5060043610610052577c010000000000000000000000000000000000000000000000000000000060003504635fe91fe38114610057578063dad18ef9146100f9575b600080fd5b6100f7600480360360a081101561006d57600080fd5b73ffffffffffffffffffffffffffffffffffffffff823581169260208101358216926040820135909216918101906080810160608201356401000000008111156100b657600080fd5b8201836020820111156100c857600080fd5b803590602001918460208302840111640100000000831117156100ea57600080fd5b9193509150351515610176565b005b6101626004803603608081101561010f57600080fd5b50803573ffffffffffffffffffffffffffffffffffffffff90811691602081013582169160408201351690606001357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916610316565b604080519115158252519081900360200190f35b604080517fd6eb1bbf0000000000000000000000000000000000000000000000000000000081523360048201529051879173ffffffffffffffffffffffffffffffffffffffff83169163d6eb1bbf91602480820192602092909190829003018186803b1580156101e557600080fd5b505afa1580156101f9573d6000803e3d6000fd5b505050506040513d602081101561020f57600080fd5b50511515610268576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260348152602001806103846034913960400191505060405180910390fd5b60005b8381101561030c5773ffffffffffffffffffffffffffffffffffffffff8089166000908152602081815260408083208b851684528252808320938a16835292905290812084918787858181106102bd57fe5b602090810292909201357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916835250810191909152604001600020805460ff191691151591909117905560010161026b565b5050505050505050565b73ffffffffffffffffffffffffffffffffffffffff8085166000908152602081815260408083208785168452825280832093861683529281528282207bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19851683529052205460ff1694935050505056fe54533a206d75737420626520616e20617574686f72697a6564206d6f64756c6520746f2063616c6c2074686973206d6574686f64a165627a7a72305820ddec39e8c1eaf40e3c1fdcf4887a0ae26b9eced8691b962d900eda5c4b7d04720029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610052577c010000000000000000000000000000000000000000000000000000000060003504635fe91fe38114610057578063dad18ef9146100f9575b600080fd5b6100f7600480360360a081101561006d57600080fd5b73ffffffffffffffffffffffffffffffffffffffff823581169260208101358216926040820135909216918101906080810160608201356401000000008111156100b657600080fd5b8201836020820111156100c857600080fd5b803590602001918460208302840111640100000000831117156100ea57600080fd5b9193509150351515610176565b005b6101626004803603608081101561010f57600080fd5b50803573ffffffffffffffffffffffffffffffffffffffff90811691602081013582169160408201351690606001357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916610316565b604080519115158252519081900360200190f35b604080517fd6eb1bbf0000000000000000000000000000000000000000000000000000000081523360048201529051879173ffffffffffffffffffffffffffffffffffffffff83169163d6eb1bbf91602480820192602092909190829003018186803b1580156101e557600080fd5b505afa1580156101f9573d6000803e3d6000fd5b505050506040513d602081101561020f57600080fd5b50511515610268576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260348152602001806103846034913960400191505060405180910390fd5b60005b8381101561030c5773ffffffffffffffffffffffffffffffffffffffff8089166000908152602081815260408083208b851684528252808320938a16835292905290812084918787858181106102bd57fe5b602090810292909201357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916835250810191909152604001600020805460ff191691151591909117905560010161026b565b5050505050505050565b73ffffffffffffffffffffffffffffffffffffffff8085166000908152602081815260408083208785168452825280832093861683529281528282207bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19851683529052205460ff1694935050505056fe54533a206d75737420626520616e20617574686f72697a6564206d6f64756c6520746f2063616c6c2074686973206d6574686f64a165627a7a72305820ddec39e8c1eaf40e3c1fdcf4887a0ae26b9eced8691b962d900eda5c4b7d04720029",
+  "sourceMap": "380:1624:32:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;380:1624:32;;;;;;;",
+  "deployedSourceMap": "380:1624:32:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;380:1624:32;;;;;;;;;;;;;;;;;;;;;;;;1029:407;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;1029:407:32;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;21:11:-1;5:28;;2:2;;;46:1;43;36:12;2:2;1029:407:32;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;1029:407:32;;;;;;101:9:-1;95:2;81:12;77:21;67:8;63:36;60:51;39:11;25:12;22:29;11:108;8:2;;;132:1;129;122:12;8:2;1029:407:32;;-1:-1:-1;1029:407:32;-1:-1:-1;1029:407:32;;;;:::i;:::-;;1778:224;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;-1:-1;1778:224:32;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1778:224:32;;:::i;:::-;;;;;;;;;;;;;;;;;;1029:407;342:30:34;;;;;;361:10;342:30;;;;;;1252:7:32;;342:18:34;;;;;;:30;;;;;;;;;;;;;;;:18;:30;;;5:2:-1;;;;30:1;27;20:12;5:2;342:30:34;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;342:30:34;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;342:30:34;334:95;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1280:6:32;1276:154;1292:22;;;1276:154;;;1335:36;;;;:18;:36;;;;;;;;;;;:43;;;;;;;;;;:54;;;;;;;;;;;1408:11;;1390;;1402:1;1390:14;;;;;;;;;;;;;;;;-1:-1:-1;;1390:14:32;1335:70;;-1:-1:-1;1335:70:32;;;;;;;;-1:-1:-1;1335:70:32;:84;;-1:-1:-1;;1335:84:32;;;;;;;;;;-1:-1:-1;1316:3:32;1276:154;;;;1029:407;;;;;;;:::o;1778:224::-;1929:36;;;;1906:4;1929:36;;;;;;;;;;;:43;;;;;;;;;;:54;;;;;;;;;;;-1:-1:-1;;1929:66:32;;;;;;;;;;1778:224;;;;;;:::o",
+  "source": "pragma solidity ^0.5.4;\nimport \"../wallet/BaseWallet.sol\";\nimport \"./Storage.sol\";\n\n/**\n * @title DappStorage\n * @dev Contract storing the state of wallets related to authorised dapps.\n * The contract only defines basic setters and getters with no logic. Only modules authorised\n * for a wallet can modify its state.\n * @author Olivier Van Den Biggelaar - <olivier@argent.im>\n */\ncontract DappStorage is Storage {\n\n    // [wallet][dappkey][contract][signature][bool]\n    mapping (address => mapping (address => mapping (address => mapping (bytes4 => bool)))) internal whitelistedMethods;\n    \n    // *************** External Functions ********************* //\n\n    /**\n     * @dev (De)authorizes an external contract's methods to be called by a dapp key of the wallet.\n     * @param _wallet The wallet.\n     * @param _dapp The address of the signing key.\n     * @param _contract The contract address.\n     * @param _signatures The methods' signatures.\n     * @param _authorized true to whitelist, false to blacklist.\n     */\n    function setMethodAuthorization(\n        BaseWallet _wallet, \n        address _dapp, \n        address _contract, \n        bytes4[] calldata _signatures, \n        bool _authorized\n    ) \n        external \n        onlyModule(_wallet) \n    {\n        for(uint i = 0; i < _signatures.length; i++) {\n            whitelistedMethods[address(_wallet)][_dapp][_contract][_signatures[i]] = _authorized;\n        }\n    }\n\n    /**\n     * @dev Gets the authorization status for an external contract's method.\n     * @param _wallet The wallet.\n     * @param _dapp The address of the signing key.\n     * @param _contract The contract address.\n     * @param _signature The call signature.\n     * @return true if the method is whitelisted, false otherwise\n     */\n    function getMethodAuthorization(BaseWallet _wallet, address _dapp, address _contract, bytes4 _signature) external view returns (bool) {\n        return whitelistedMethods[address(_wallet)][_dapp][_contract][_signature];\n    }\n}",
+  "sourcePath": "/home/amxx/Work/Argent/argent-contracts/contracts/storage/DappStorage.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/storage/DappStorage.sol",
+    "exportedSymbols": {
+      "DappStorage": [
+        11426
+      ]
+    },
+    "id": 11427,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11338,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:32"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/wallet/BaseWallet.sol",
+        "file": "../wallet/BaseWallet.sol",
+        "id": 11339,
+        "nodeType": "ImportDirective",
+        "scope": 11427,
+        "sourceUnit": 29801,
+        "src": "24:34:32",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/storage/Storage.sol",
+        "file": "./Storage.sol",
+        "id": 11340,
+        "nodeType": "ImportDirective",
+        "scope": 11427,
+        "sourceUnit": 11774,
+        "src": "59:23:32",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 11341,
+              "name": "Storage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11773,
+              "src": "404:7:32",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Storage_$11773",
+                "typeString": "contract Storage"
+              }
+            },
+            "id": 11342,
+            "nodeType": "InheritanceSpecifier",
+            "src": "404:7:32"
+          }
+        ],
+        "contractDependencies": [
+          11773
+        ],
+        "contractKind": "contract",
+        "documentation": "@title DappStorage\n@dev Contract storing the state of wallets related to authorised dapps.\nThe contract only defines basic setters and getters with no logic. Only modules authorised\nfor a wallet can modify its state.\n@author Olivier Van Den Biggelaar - <olivier@argent.im>",
+        "fullyImplemented": true,
+        "id": 11426,
+        "linearizedBaseContracts": [
+          11426,
+          11773
+        ],
+        "name": "DappStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 11352,
+            "name": "whitelistedMethods",
+            "nodeType": "VariableDeclaration",
+            "scope": 11426,
+            "src": "471:115:32",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$_$",
+              "typeString": "mapping(address => mapping(address => mapping(address => mapping(bytes4 => bool))))"
+            },
+            "typeName": {
+              "id": 11351,
+              "keyType": {
+                "id": 11343,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "480:7:32",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "471:87:32",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$_$",
+                "typeString": "mapping(address => mapping(address => mapping(address => mapping(bytes4 => bool))))"
+              },
+              "valueType": {
+                "id": 11350,
+                "keyType": {
+                  "id": 11344,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "500:7:32",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "491:66:32",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$",
+                  "typeString": "mapping(address => mapping(address => mapping(bytes4 => bool)))"
+                },
+                "valueType": {
+                  "id": 11349,
+                  "keyType": {
+                    "id": 11345,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "520:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "511:45:32",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$",
+                    "typeString": "mapping(address => mapping(bytes4 => bool))"
+                  },
+                  "valueType": {
+                    "id": 11348,
+                    "keyType": {
+                      "id": 11346,
+                      "name": "bytes4",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "540:6:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "nodeType": "Mapping",
+                    "src": "531:24:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_mapping$_t_bytes4_$_t_bool_$",
+                      "typeString": "mapping(bytes4 => bool)"
+                    },
+                    "valueType": {
+                      "id": 11347,
+                      "name": "bool",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "550:4:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 11398,
+              "nodeType": "Block",
+              "src": "1266:170:32",
+              "statements": [
+                {
+                  "body": {
+                    "id": 11396,
+                    "nodeType": "Block",
+                    "src": "1321:109:32",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 11394,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "argumentTypes": null,
+                            "baseExpression": {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "baseExpression": {
+                                  "argumentTypes": null,
+                                  "baseExpression": {
+                                    "argumentTypes": null,
+                                    "id": 11380,
+                                    "name": "whitelistedMethods",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 11352,
+                                    "src": "1335:18:32",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$_$",
+                                      "typeString": "mapping(address => mapping(address => mapping(address => mapping(bytes4 => bool))))"
+                                    }
+                                  },
+                                  "id": 11389,
+                                  "indexExpression": {
+                                    "argumentTypes": null,
+                                    "arguments": [
+                                      {
+                                        "argumentTypes": null,
+                                        "id": 11382,
+                                        "name": "_wallet",
+                                        "nodeType": "Identifier",
+                                        "overloadedDeclarations": [],
+                                        "referencedDeclaration": 11354,
+                                        "src": "1362:7:32",
+                                        "typeDescriptions": {
+                                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                                          "typeString": "contract BaseWallet"
+                                        }
+                                      }
+                                    ],
+                                    "expression": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                                          "typeString": "contract BaseWallet"
+                                        }
+                                      ],
+                                      "id": 11381,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "nodeType": "ElementaryTypeNameExpression",
+                                      "src": "1354:7:32",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_type$_t_address_$",
+                                        "typeString": "type(address)"
+                                      },
+                                      "typeName": "address"
+                                    },
+                                    "id": 11383,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "kind": "typeConversion",
+                                    "lValueRequested": false,
+                                    "names": [],
+                                    "nodeType": "FunctionCall",
+                                    "src": "1354:16:32",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_address_payable",
+                                      "typeString": "address payable"
+                                    }
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "nodeType": "IndexAccess",
+                                  "src": "1335:36:32",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$",
+                                    "typeString": "mapping(address => mapping(address => mapping(bytes4 => bool)))"
+                                  }
+                                },
+                                "id": 11390,
+                                "indexExpression": {
+                                  "argumentTypes": null,
+                                  "id": 11384,
+                                  "name": "_dapp",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 11356,
+                                  "src": "1372:5:32",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                  }
+                                },
+                                "isConstant": false,
+                                "isLValue": true,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "nodeType": "IndexAccess",
+                                "src": "1335:43:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$",
+                                  "typeString": "mapping(address => mapping(bytes4 => bool))"
+                                }
+                              },
+                              "id": 11391,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 11385,
+                                "name": "_contract",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11358,
+                                "src": "1379:9:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "1335:54:32",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_bytes4_$_t_bool_$",
+                                "typeString": "mapping(bytes4 => bool)"
+                              }
+                            },
+                            "id": 11392,
+                            "indexExpression": {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "id": 11386,
+                                "name": "_signatures",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11361,
+                                "src": "1390:11:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_array$_t_bytes4_$dyn_calldata_ptr",
+                                  "typeString": "bytes4[] calldata"
+                                }
+                              },
+                              "id": 11388,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 11387,
+                                "name": "i",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11370,
+                                "src": "1402:1:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "1390:14:32",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_bytes4",
+                                "typeString": "bytes4"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "1335:70:32",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "argumentTypes": null,
+                            "id": 11393,
+                            "name": "_authorized",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11363,
+                            "src": "1408:11:32",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "src": "1335:84:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "id": 11395,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1335:84:32"
+                      }
+                    ]
+                  },
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 11376,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "id": 11373,
+                      "name": "i",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11370,
+                      "src": "1292:1:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "<",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 11374,
+                        "name": "_signatures",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11361,
+                        "src": "1296:11:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_bytes4_$dyn_calldata_ptr",
+                          "typeString": "bytes4[] calldata"
+                        }
+                      },
+                      "id": 11375,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "length",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1296:18:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1292:22:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11397,
+                  "initializationExpression": {
+                    "assignments": [
+                      11370
+                    ],
+                    "declarations": [
+                      {
+                        "constant": false,
+                        "id": 11370,
+                        "name": "i",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 11397,
+                        "src": "1280:6:32",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 11369,
+                          "name": "uint",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1280:4:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "id": 11372,
+                    "initialValue": {
+                      "argumentTypes": null,
+                      "hexValue": "30",
+                      "id": 11371,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1289:1:32",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "nodeType": "VariableDeclarationStatement",
+                    "src": "1280:10:32"
+                  },
+                  "loopExpression": {
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 11378,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "++",
+                      "prefix": false,
+                      "src": "1316:3:32",
+                      "subExpression": {
+                        "argumentTypes": null,
+                        "id": 11377,
+                        "name": "i",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11370,
+                        "src": "1316:1:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 11379,
+                    "nodeType": "ExpressionStatement",
+                    "src": "1316:3:32"
+                  },
+                  "nodeType": "ForStatement",
+                  "src": "1276:154:32"
+                }
+              ]
+            },
+            "documentation": "@dev (De)authorizes an external contract's methods to be called by a dapp key of the wallet.\n@param _wallet The wallet.\n@param _dapp The address of the signing key.\n@param _contract The contract address.\n@param _signatures The methods' signatures.\n@param _authorized true to whitelist, false to blacklist.",
+            "id": 11399,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 11366,
+                    "name": "_wallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11354,
+                    "src": "1252:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  }
+                ],
+                "id": 11367,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 11365,
+                  "name": "onlyModule",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 11772,
+                  "src": "1241:10:32",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_contract$_BaseWallet_$29800_$",
+                    "typeString": "modifier (contract BaseWallet)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1241:19:32"
+              }
+            ],
+            "name": "setMethodAuthorization",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11364,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11354,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1070:18:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11353,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1070:10:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11356,
+                  "name": "_dapp",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1099:13:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11355,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1099:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11358,
+                  "name": "_contract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1123:17:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11357,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1123:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11361,
+                  "name": "_signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1151:29:32",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes4_$dyn_calldata_ptr",
+                    "typeString": "bytes4[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 11359,
+                      "name": "bytes4",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1151:6:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "id": 11360,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1151:8:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes4_$dyn_storage_ptr",
+                      "typeString": "bytes4[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11363,
+                  "name": "_authorized",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1191:16:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 11362,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1191:4:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1060:153:32"
+            },
+            "returnParameters": {
+              "id": 11368,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1266:0:32"
+            },
+            "scope": 11426,
+            "src": "1029:407:32",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 11424,
+              "nodeType": "Block",
+              "src": "1912:90:32",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 11412,
+                            "name": "whitelistedMethods",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11352,
+                            "src": "1929:18:32",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$_$",
+                              "typeString": "mapping(address => mapping(address => mapping(address => mapping(bytes4 => bool))))"
+                            }
+                          },
+                          "id": 11416,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 11414,
+                                "name": "_wallet",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11401,
+                                "src": "1956:7:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                                  "typeString": "contract BaseWallet"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                                  "typeString": "contract BaseWallet"
+                                }
+                              ],
+                              "id": 11413,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1948:7:32",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 11415,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1948:16:32",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "1929:36:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$",
+                            "typeString": "mapping(address => mapping(address => mapping(bytes4 => bool)))"
+                          }
+                        },
+                        "id": 11418,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 11417,
+                          "name": "_dapp",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11403,
+                          "src": "1966:5:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1929:43:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$",
+                          "typeString": "mapping(address => mapping(bytes4 => bool))"
+                        }
+                      },
+                      "id": 11420,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 11419,
+                        "name": "_contract",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11405,
+                        "src": "1973:9:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1929:54:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_bytes4_$_t_bool_$",
+                        "typeString": "mapping(bytes4 => bool)"
+                      }
+                    },
+                    "id": 11422,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 11421,
+                      "name": "_signature",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11407,
+                      "src": "1984:10:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1929:66:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 11411,
+                  "id": 11423,
+                  "nodeType": "Return",
+                  "src": "1922:73:32"
+                }
+              ]
+            },
+            "documentation": "@dev Gets the authorization status for an external contract's method.\n@param _wallet The wallet.\n@param _dapp The address of the signing key.\n@param _contract The contract address.\n@param _signature The call signature.\n@return true if the method is whitelisted, false otherwise",
+            "id": 11425,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getMethodAuthorization",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11408,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11401,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1810:18:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11400,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1810:10:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11403,
+                  "name": "_dapp",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1830:13:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11402,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1830:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11405,
+                  "name": "_contract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1845:17:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11404,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1845:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11407,
+                  "name": "_signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1864:17:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 11406,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1864:6:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1809:73:32"
+            },
+            "returnParameters": {
+              "id": 11411,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11410,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1906:4:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 11409,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1906:4:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1905:6:32"
+            },
+            "scope": 11426,
+            "src": "1778:224:32",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 11427,
+        "src": "380:1624:32"
+      }
+    ],
+    "src": "0:2004:32"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/storage/DappStorage.sol",
+    "exportedSymbols": {
+      "DappStorage": [
+        11426
+      ]
+    },
+    "id": 11427,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11338,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:32"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/wallet/BaseWallet.sol",
+        "file": "../wallet/BaseWallet.sol",
+        "id": 11339,
+        "nodeType": "ImportDirective",
+        "scope": 11427,
+        "sourceUnit": 29801,
+        "src": "24:34:32",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/storage/Storage.sol",
+        "file": "./Storage.sol",
+        "id": 11340,
+        "nodeType": "ImportDirective",
+        "scope": 11427,
+        "sourceUnit": 11774,
+        "src": "59:23:32",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 11341,
+              "name": "Storage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11773,
+              "src": "404:7:32",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Storage_$11773",
+                "typeString": "contract Storage"
+              }
+            },
+            "id": 11342,
+            "nodeType": "InheritanceSpecifier",
+            "src": "404:7:32"
+          }
+        ],
+        "contractDependencies": [
+          11773
+        ],
+        "contractKind": "contract",
+        "documentation": "@title DappStorage\n@dev Contract storing the state of wallets related to authorised dapps.\nThe contract only defines basic setters and getters with no logic. Only modules authorised\nfor a wallet can modify its state.\n@author Olivier Van Den Biggelaar - <olivier@argent.im>",
+        "fullyImplemented": true,
+        "id": 11426,
+        "linearizedBaseContracts": [
+          11426,
+          11773
+        ],
+        "name": "DappStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 11352,
+            "name": "whitelistedMethods",
+            "nodeType": "VariableDeclaration",
+            "scope": 11426,
+            "src": "471:115:32",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$_$",
+              "typeString": "mapping(address => mapping(address => mapping(address => mapping(bytes4 => bool))))"
+            },
+            "typeName": {
+              "id": 11351,
+              "keyType": {
+                "id": 11343,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "480:7:32",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "471:87:32",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$_$",
+                "typeString": "mapping(address => mapping(address => mapping(address => mapping(bytes4 => bool))))"
+              },
+              "valueType": {
+                "id": 11350,
+                "keyType": {
+                  "id": 11344,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "500:7:32",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "491:66:32",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$",
+                  "typeString": "mapping(address => mapping(address => mapping(bytes4 => bool)))"
+                },
+                "valueType": {
+                  "id": 11349,
+                  "keyType": {
+                    "id": 11345,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "520:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "511:45:32",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$",
+                    "typeString": "mapping(address => mapping(bytes4 => bool))"
+                  },
+                  "valueType": {
+                    "id": 11348,
+                    "keyType": {
+                      "id": 11346,
+                      "name": "bytes4",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "540:6:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "nodeType": "Mapping",
+                    "src": "531:24:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_mapping$_t_bytes4_$_t_bool_$",
+                      "typeString": "mapping(bytes4 => bool)"
+                    },
+                    "valueType": {
+                      "id": 11347,
+                      "name": "bool",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "550:4:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 11398,
+              "nodeType": "Block",
+              "src": "1266:170:32",
+              "statements": [
+                {
+                  "body": {
+                    "id": 11396,
+                    "nodeType": "Block",
+                    "src": "1321:109:32",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 11394,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "argumentTypes": null,
+                            "baseExpression": {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "baseExpression": {
+                                  "argumentTypes": null,
+                                  "baseExpression": {
+                                    "argumentTypes": null,
+                                    "id": 11380,
+                                    "name": "whitelistedMethods",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 11352,
+                                    "src": "1335:18:32",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$_$",
+                                      "typeString": "mapping(address => mapping(address => mapping(address => mapping(bytes4 => bool))))"
+                                    }
+                                  },
+                                  "id": 11389,
+                                  "indexExpression": {
+                                    "argumentTypes": null,
+                                    "arguments": [
+                                      {
+                                        "argumentTypes": null,
+                                        "id": 11382,
+                                        "name": "_wallet",
+                                        "nodeType": "Identifier",
+                                        "overloadedDeclarations": [],
+                                        "referencedDeclaration": 11354,
+                                        "src": "1362:7:32",
+                                        "typeDescriptions": {
+                                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                                          "typeString": "contract BaseWallet"
+                                        }
+                                      }
+                                    ],
+                                    "expression": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                                          "typeString": "contract BaseWallet"
+                                        }
+                                      ],
+                                      "id": 11381,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "nodeType": "ElementaryTypeNameExpression",
+                                      "src": "1354:7:32",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_type$_t_address_$",
+                                        "typeString": "type(address)"
+                                      },
+                                      "typeName": "address"
+                                    },
+                                    "id": 11383,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "kind": "typeConversion",
+                                    "lValueRequested": false,
+                                    "names": [],
+                                    "nodeType": "FunctionCall",
+                                    "src": "1354:16:32",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_address_payable",
+                                      "typeString": "address payable"
+                                    }
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "nodeType": "IndexAccess",
+                                  "src": "1335:36:32",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$",
+                                    "typeString": "mapping(address => mapping(address => mapping(bytes4 => bool)))"
+                                  }
+                                },
+                                "id": 11390,
+                                "indexExpression": {
+                                  "argumentTypes": null,
+                                  "id": 11384,
+                                  "name": "_dapp",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 11356,
+                                  "src": "1372:5:32",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                  }
+                                },
+                                "isConstant": false,
+                                "isLValue": true,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "nodeType": "IndexAccess",
+                                "src": "1335:43:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$",
+                                  "typeString": "mapping(address => mapping(bytes4 => bool))"
+                                }
+                              },
+                              "id": 11391,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 11385,
+                                "name": "_contract",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11358,
+                                "src": "1379:9:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "1335:54:32",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_bytes4_$_t_bool_$",
+                                "typeString": "mapping(bytes4 => bool)"
+                              }
+                            },
+                            "id": 11392,
+                            "indexExpression": {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "id": 11386,
+                                "name": "_signatures",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11361,
+                                "src": "1390:11:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_array$_t_bytes4_$dyn_calldata_ptr",
+                                  "typeString": "bytes4[] calldata"
+                                }
+                              },
+                              "id": 11388,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 11387,
+                                "name": "i",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11370,
+                                "src": "1402:1:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "1390:14:32",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_bytes4",
+                                "typeString": "bytes4"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "1335:70:32",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "argumentTypes": null,
+                            "id": 11393,
+                            "name": "_authorized",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11363,
+                            "src": "1408:11:32",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "src": "1335:84:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "id": 11395,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1335:84:32"
+                      }
+                    ]
+                  },
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 11376,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "id": 11373,
+                      "name": "i",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11370,
+                      "src": "1292:1:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "<",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 11374,
+                        "name": "_signatures",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11361,
+                        "src": "1296:11:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_bytes4_$dyn_calldata_ptr",
+                          "typeString": "bytes4[] calldata"
+                        }
+                      },
+                      "id": 11375,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "length",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1296:18:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1292:22:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 11397,
+                  "initializationExpression": {
+                    "assignments": [
+                      11370
+                    ],
+                    "declarations": [
+                      {
+                        "constant": false,
+                        "id": 11370,
+                        "name": "i",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 11397,
+                        "src": "1280:6:32",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 11369,
+                          "name": "uint",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1280:4:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "id": 11372,
+                    "initialValue": {
+                      "argumentTypes": null,
+                      "hexValue": "30",
+                      "id": 11371,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1289:1:32",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "nodeType": "VariableDeclarationStatement",
+                    "src": "1280:10:32"
+                  },
+                  "loopExpression": {
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 11378,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "++",
+                      "prefix": false,
+                      "src": "1316:3:32",
+                      "subExpression": {
+                        "argumentTypes": null,
+                        "id": 11377,
+                        "name": "i",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11370,
+                        "src": "1316:1:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 11379,
+                    "nodeType": "ExpressionStatement",
+                    "src": "1316:3:32"
+                  },
+                  "nodeType": "ForStatement",
+                  "src": "1276:154:32"
+                }
+              ]
+            },
+            "documentation": "@dev (De)authorizes an external contract's methods to be called by a dapp key of the wallet.\n@param _wallet The wallet.\n@param _dapp The address of the signing key.\n@param _contract The contract address.\n@param _signatures The methods' signatures.\n@param _authorized true to whitelist, false to blacklist.",
+            "id": 11399,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 11366,
+                    "name": "_wallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 11354,
+                    "src": "1252:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  }
+                ],
+                "id": 11367,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 11365,
+                  "name": "onlyModule",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 11772,
+                  "src": "1241:10:32",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_contract$_BaseWallet_$29800_$",
+                    "typeString": "modifier (contract BaseWallet)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1241:19:32"
+              }
+            ],
+            "name": "setMethodAuthorization",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11364,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11354,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1070:18:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11353,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1070:10:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11356,
+                  "name": "_dapp",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1099:13:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11355,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1099:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11358,
+                  "name": "_contract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1123:17:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11357,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1123:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11361,
+                  "name": "_signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1151:29:32",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes4_$dyn_calldata_ptr",
+                    "typeString": "bytes4[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 11359,
+                      "name": "bytes4",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1151:6:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "id": 11360,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1151:8:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes4_$dyn_storage_ptr",
+                      "typeString": "bytes4[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11363,
+                  "name": "_authorized",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11399,
+                  "src": "1191:16:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 11362,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1191:4:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1060:153:32"
+            },
+            "returnParameters": {
+              "id": 11368,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1266:0:32"
+            },
+            "scope": 11426,
+            "src": "1029:407:32",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 11424,
+              "nodeType": "Block",
+              "src": "1912:90:32",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 11412,
+                            "name": "whitelistedMethods",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11352,
+                            "src": "1929:18:32",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$_$",
+                              "typeString": "mapping(address => mapping(address => mapping(address => mapping(bytes4 => bool))))"
+                            }
+                          },
+                          "id": 11416,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 11414,
+                                "name": "_wallet",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11401,
+                                "src": "1956:7:32",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                                  "typeString": "contract BaseWallet"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                                  "typeString": "contract BaseWallet"
+                                }
+                              ],
+                              "id": 11413,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1948:7:32",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 11415,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1948:16:32",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "1929:36:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$_$",
+                            "typeString": "mapping(address => mapping(address => mapping(bytes4 => bool)))"
+                          }
+                        },
+                        "id": 11418,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 11417,
+                          "name": "_dapp",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11403,
+                          "src": "1966:5:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1929:43:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_bytes4_$_t_bool_$_$",
+                          "typeString": "mapping(address => mapping(bytes4 => bool))"
+                        }
+                      },
+                      "id": 11420,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 11419,
+                        "name": "_contract",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11405,
+                        "src": "1973:9:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1929:54:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_bytes4_$_t_bool_$",
+                        "typeString": "mapping(bytes4 => bool)"
+                      }
+                    },
+                    "id": 11422,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 11421,
+                      "name": "_signature",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11407,
+                      "src": "1984:10:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1929:66:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 11411,
+                  "id": 11423,
+                  "nodeType": "Return",
+                  "src": "1922:73:32"
+                }
+              ]
+            },
+            "documentation": "@dev Gets the authorization status for an external contract's method.\n@param _wallet The wallet.\n@param _dapp The address of the signing key.\n@param _contract The contract address.\n@param _signature The call signature.\n@return true if the method is whitelisted, false otherwise",
+            "id": 11425,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getMethodAuthorization",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11408,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11401,
+                  "name": "_wallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1810:18:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                    "typeString": "contract BaseWallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11400,
+                    "name": "BaseWallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 29800,
+                    "src": "1810:10:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BaseWallet_$29800",
+                      "typeString": "contract BaseWallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11403,
+                  "name": "_dapp",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1830:13:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11402,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1830:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11405,
+                  "name": "_contract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1845:17:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11404,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1845:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11407,
+                  "name": "_signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1864:17:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 11406,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1864:6:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1809:73:32"
+            },
+            "returnParameters": {
+              "id": 11411,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11410,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11425,
+                  "src": "1906:4:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 11409,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1906:4:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1905:6:32"
+            },
+            "scope": 11426,
+            "src": "1778:224:32",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 11427,
+        "src": "380:1624:32"
+      }
+    ],
+    "src": "0:2004:32"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang",
+    "optimizer": true,
+    "runs": 200
+  },
+  "networks": {},
+  "schemaVersion": "2.2.4",
+  "updatedAt": "2020-02-29T16:28:22.575Z"
+}

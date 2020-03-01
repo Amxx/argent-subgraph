@@ -1,0 +1,1842 @@
+{
+  "contractName": "ENSConsumer",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ADDR_REVERSE_NODE",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_ensRegistry",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "resolveEns",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getENSRegistry",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getENSReverseRegistrar",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506040516020806103718339810180604052602081101561003057600080fd5b505160008054600160a060020a03909216600160a060020a031990921691909117905561030f806100626000396000f3fe608060405234801561001057600080fd5b506004361061004f5760e060020a600035046309d7344281146100545780632f680795146100855780637cf8a2eb1461008d5780639eb869c7146100a7575b600080fd5b61005c6100c4565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b61005c610175565b610095610191565b60408051918252519081900360200190f35b61005c600480360360208110156100bd57600080fd5b50356101b5565b60006100ce610175565b73ffffffffffffffffffffffffffffffffffffffff166302571be37f91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e26001026040518263ffffffff1660e060020a0281526004018082815260200191505060206040518083038186803b15801561014457600080fd5b505afa158015610158573d6000803e3d6000fd5b505050506040513d602081101561016e57600080fd5b5051905090565b60005473ffffffffffffffffffffffffffffffffffffffff1690565b7f91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e281565b6000806101c0610175565b73ffffffffffffffffffffffffffffffffffffffff16630178b8bf846040518263ffffffff1660e060020a0281526004018082815260200191505060206040518083038186803b15801561021357600080fd5b505afa158015610227573d6000803e3d6000fd5b505050506040513d602081101561023d57600080fd5b5051604080517f3b3b57de00000000000000000000000000000000000000000000000000000000815260048101869052905191925073ffffffffffffffffffffffffffffffffffffffff831691633b3b57de91602480820192602092909190829003018186803b1580156102b057600080fd5b505afa1580156102c4573d6000803e3d6000fd5b505050506040513d60208110156102da57600080fd5b5051939250505056fea165627a7a72305820543b180b0a3778e00aac05ba5b1863d416a139b81cae528a2dad3132eed058180029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004f5760e060020a600035046309d7344281146100545780632f680795146100855780637cf8a2eb1461008d5780639eb869c7146100a7575b600080fd5b61005c6100c4565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b61005c610175565b610095610191565b60408051918252519081900360200190f35b61005c600480360360208110156100bd57600080fd5b50356101b5565b60006100ce610175565b73ffffffffffffffffffffffffffffffffffffffff166302571be37f91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e26001026040518263ffffffff1660e060020a0281526004018082815260200191505060206040518083038186803b15801561014457600080fd5b505afa158015610158573d6000803e3d6000fd5b505050506040513d602081101561016e57600080fd5b5051905090565b60005473ffffffffffffffffffffffffffffffffffffffff1690565b7f91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e281565b6000806101c0610175565b73ffffffffffffffffffffffffffffffffffffffff16630178b8bf846040518263ffffffff1660e060020a0281526004018082815260200191505060206040518083038186803b15801561021357600080fd5b505afa158015610227573d6000803e3d6000fd5b505050506040513d602081101561023d57600080fd5b5051604080517f3b3b57de00000000000000000000000000000000000000000000000000000000815260048101869052905191925073ffffffffffffffffffffffffffffffffffffffff831691633b3b57de91602480820192602092909190829003018186803b1580156102b057600080fd5b505afa1580156102c4573d6000803e3d6000fd5b505050506040513d60208110156102da57600080fd5b5051939250505056fea165627a7a72305820543b180b0a3778e00aac05ba5b1863d416a139b81cae528a2dad3132eed058180029",
+  "sourceMap": "202:1218:11:-;;;625:84;8:9:-1;5:2;;;30:1;27;20:12;5:2;625:84:11;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;625:84:11;676:11;:26;;-1:-1:-1;;;;;676:26:11;;;-1:-1:-1;;;;;;676:26:11;;;;;;;;;202:1218;;;;;;",
+  "deployedSourceMap": "202:1218:11:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;202:1218:11;;;;;;-1:-1:-1;;;202:1218:11;;;;;;;;;;;;;;;;;;;;;;;;;;;1256:162;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1074:108;;;:::i;288:110::-;;;:::i;:::-;;;;;;;;;;;;;;;;827:183;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;827:183:11;;:::i;1256:162::-;1311:19;1369:16;:14;:16::i;:::-;:22;;;332:66;1392:17;;1369:41;;;;;-1:-1:-1;;;1369:41:11;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1369:41:11;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1369:41:11;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1369:41:11;;-1:-1:-1;1256:162:11;:::o;1074:108::-;1121:11;1163;;;1074:108;:::o;288:110::-;332:66;288:110;:::o;827:183::-;883:7;902:16;921;:14;:16::i;:::-;:25;;;947:5;921:32;;;;;-1:-1:-1;;;921:32:11;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;921:32:11;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;921:32:11;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;921:32:11;970:33;;;;;;;;;;;;;;921:32;;-1:-1:-1;970:26:11;;;;;;:33;;;;;921:32;;970:33;;;;;;;;:26;:33;;;5:2:-1;;;;30:1;27;20:12;5:2;970:33:11;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;970:33:11;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;970:33:11;;827:183;-1:-1:-1;;;827:183:11:o",
+  "source": "pragma solidity ^0.5.4;\nimport \"../ens/ENS.sol\";\nimport \"../utils/strings.sol\";\n\n/**\n * @title ENSConsumer\n * @dev Helper contract to resolve ENS names.\n * @author Julien Niset - <julien@argent.im>\n */\ncontract ENSConsumer {\n\n    using strings for *;\n\n    // namehash('addr.reverse')\n    bytes32 constant public ADDR_REVERSE_NODE = 0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2;\n\n    // the address of the ENS registry\n    address ensRegistry;\n\n    /**\n    * @dev No address should be provided when deploying on Mainnet to avoid storage cost. The \n    * contract will use the hardcoded value.\n    */\n    constructor(address _ensRegistry) public {\n        ensRegistry = _ensRegistry;\n    }\n\n    /**\n    * @dev Resolves an ENS name to an address.\n    * @param _node The namehash of the ENS name. \n    */\n    function resolveEns(bytes32 _node) public view returns (address) {\n        address resolver = getENSRegistry().resolver(_node);\n        return ENSResolver(resolver).addr(_node);\n    }\n\n    /**\n    * @dev Gets the official ENS registry.\n    */\n    function getENSRegistry() public view returns (ENSRegistry) {\n        return ENSRegistry(ensRegistry);\n    }\n\n    /**\n    * @dev Gets the official ENS reverse registrar. \n    */\n    function getENSReverseRegistrar() public view returns (ENSReverseRegistrar) {\n        return ENSReverseRegistrar(getENSRegistry().owner(ADDR_REVERSE_NODE));\n    }\n}",
+  "sourcePath": "/home/amxx/Work/Argent/argent-contracts/contracts/ens/ENSConsumer.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/ens/ENSConsumer.sol",
+    "exportedSymbols": {
+      "ENSConsumer": [
+        1801
+      ]
+    },
+    "id": 1802,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1734,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:11"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/ens/ENS.sol",
+        "file": "../ens/ENS.sol",
+        "id": 1735,
+        "nodeType": "ImportDirective",
+        "scope": 1802,
+        "sourceUnit": 1733,
+        "src": "24:24:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/utils/strings.sol",
+        "file": "../utils/strings.sol",
+        "id": 1736,
+        "nodeType": "ImportDirective",
+        "scope": 1802,
+        "sourceUnit": 29451,
+        "src": "49:30:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title ENSConsumer\n@dev Helper contract to resolve ENS names.\n@author Julien Niset - <julien@argent.im>",
+        "fullyImplemented": true,
+        "id": 1801,
+        "linearizedBaseContracts": [
+          1801
+        ],
+        "name": "ENSConsumer",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 1738,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1737,
+              "name": "strings",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 29450,
+              "src": "236:7:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_strings_$29450",
+                "typeString": "library strings"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "230:20:11",
+            "typeName": null
+          },
+          {
+            "constant": true,
+            "id": 1741,
+            "name": "ADDR_REVERSE_NODE",
+            "nodeType": "VariableDeclaration",
+            "scope": 1801,
+            "src": "288:110:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 1739,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "288:7:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307839316431373737373831383834643033613637353761383033393936653338646532613432393637666233376565616361373237323932373130323561396532",
+              "id": 1740,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "332:66:11",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_65955458610802586644366824307633271870356699036341805474246458084352783133154_by_1",
+                "typeString": "int_const 6595...(69 digits omitted)...3154"
+              },
+              "value": "0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1743,
+            "name": "ensRegistry",
+            "nodeType": "VariableDeclaration",
+            "scope": 1801,
+            "src": "444:19:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1742,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "444:7:11",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1752,
+              "nodeType": "Block",
+              "src": "666:43:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1750,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1748,
+                      "name": "ensRegistry",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1743,
+                      "src": "676:11:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 1749,
+                      "name": "_ensRegistry",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1745,
+                      "src": "690:12:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "676:26:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 1751,
+                  "nodeType": "ExpressionStatement",
+                  "src": "676:26:11"
+                }
+              ]
+            },
+            "documentation": "@dev No address should be provided when deploying on Mainnet to avoid storage cost. The \ncontract will use the hardcoded value.",
+            "id": 1753,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1746,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1745,
+                  "name": "_ensRegistry",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1753,
+                  "src": "637:20:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1744,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "637:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "636:22:11"
+            },
+            "returnParameters": {
+              "id": 1747,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "666:0:11"
+            },
+            "scope": 1801,
+            "src": "625:84:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1775,
+              "nodeType": "Block",
+              "src": "892:118:11",
+              "statements": [
+                {
+                  "assignments": [
+                    1761
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1761,
+                      "name": "resolver",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1775,
+                      "src": "902:16:11",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 1760,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "902:7:11",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1767,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1765,
+                        "name": "_node",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1755,
+                        "src": "947:5:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 1762,
+                          "name": "getENSRegistry",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1786,
+                          "src": "921:14:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_contract$_ENSRegistry_$1672_$",
+                            "typeString": "function () view returns (contract ENSRegistry)"
+                          }
+                        },
+                        "id": 1763,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "921:16:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                          "typeString": "contract ENSRegistry"
+                        }
+                      },
+                      "id": 1764,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "resolver",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1634,
+                      "src": "921:25:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_address_$",
+                        "typeString": "function (bytes32) view external returns (address)"
+                      }
+                    },
+                    "id": 1766,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "921:32:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "902:51:11"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1772,
+                        "name": "_node",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1755,
+                        "src": "997:5:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1769,
+                            "name": "resolver",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1761,
+                            "src": "982:8:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 1768,
+                          "name": "ENSResolver",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1701,
+                          "src": "970:11:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_ENSResolver_$1701_$",
+                            "typeString": "type(contract ENSResolver)"
+                          }
+                        },
+                        "id": 1770,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "970:21:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ENSResolver_$1701",
+                          "typeString": "contract ENSResolver"
+                        }
+                      },
+                      "id": 1771,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1679,
+                      "src": "970:26:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_address_$",
+                        "typeString": "function (bytes32) view external returns (address)"
+                      }
+                    },
+                    "id": 1773,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "970:33:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 1759,
+                  "id": 1774,
+                  "nodeType": "Return",
+                  "src": "963:40:11"
+                }
+              ]
+            },
+            "documentation": "@dev Resolves an ENS name to an address.\n@param _node The namehash of the ENS name. ",
+            "id": 1776,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "resolveEns",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1756,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1755,
+                  "name": "_node",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1776,
+                  "src": "847:13:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1754,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "847:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "846:15:11"
+            },
+            "returnParameters": {
+              "id": 1759,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1758,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1776,
+                  "src": "883:7:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1757,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "883:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "882:9:11"
+            },
+            "scope": 1801,
+            "src": "827:183:11",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1785,
+              "nodeType": "Block",
+              "src": "1134:48:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1782,
+                        "name": "ensRegistry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1743,
+                        "src": "1163:11:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1781,
+                      "name": "ENSRegistry",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1672,
+                      "src": "1151:11:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_ENSRegistry_$1672_$",
+                        "typeString": "type(contract ENSRegistry)"
+                      }
+                    },
+                    "id": 1783,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1151:24:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                      "typeString": "contract ENSRegistry"
+                    }
+                  },
+                  "functionReturnParameters": 1780,
+                  "id": 1784,
+                  "nodeType": "Return",
+                  "src": "1144:31:11"
+                }
+              ]
+            },
+            "documentation": "@dev Gets the official ENS registry.",
+            "id": 1786,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getENSRegistry",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1777,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1097:2:11"
+            },
+            "returnParameters": {
+              "id": 1780,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1779,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1786,
+                  "src": "1121:11:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                    "typeString": "contract ENSRegistry"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1778,
+                    "name": "ENSRegistry",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1672,
+                    "src": "1121:11:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                      "typeString": "contract ENSRegistry"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1120:13:11"
+            },
+            "scope": 1801,
+            "src": "1074:108:11",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1799,
+              "nodeType": "Block",
+              "src": "1332:86:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1795,
+                            "name": "ADDR_REVERSE_NODE",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1741,
+                            "src": "1392:17:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "id": 1792,
+                              "name": "getENSRegistry",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1786,
+                              "src": "1369:14:11",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_view$__$returns$_t_contract$_ENSRegistry_$1672_$",
+                                "typeString": "function () view returns (contract ENSRegistry)"
+                              }
+                            },
+                            "id": 1793,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1369:16:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                              "typeString": "contract ENSRegistry"
+                            }
+                          },
+                          "id": 1794,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "owner",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 1627,
+                          "src": "1369:22:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_address_$",
+                            "typeString": "function (bytes32) view external returns (address)"
+                          }
+                        },
+                        "id": 1796,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1369:41:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1791,
+                      "name": "ENSReverseRegistrar",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1732,
+                      "src": "1349:19:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_ENSReverseRegistrar_$1732_$",
+                        "typeString": "type(contract ENSReverseRegistrar)"
+                      }
+                    },
+                    "id": 1797,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1349:62:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ENSReverseRegistrar_$1732",
+                      "typeString": "contract ENSReverseRegistrar"
+                    }
+                  },
+                  "functionReturnParameters": 1790,
+                  "id": 1798,
+                  "nodeType": "Return",
+                  "src": "1342:69:11"
+                }
+              ]
+            },
+            "documentation": "@dev Gets the official ENS reverse registrar. ",
+            "id": 1800,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getENSReverseRegistrar",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1787,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1287:2:11"
+            },
+            "returnParameters": {
+              "id": 1790,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1789,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1800,
+                  "src": "1311:19:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ENSReverseRegistrar_$1732",
+                    "typeString": "contract ENSReverseRegistrar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1788,
+                    "name": "ENSReverseRegistrar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1732,
+                    "src": "1311:19:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ENSReverseRegistrar_$1732",
+                      "typeString": "contract ENSReverseRegistrar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1310:21:11"
+            },
+            "scope": 1801,
+            "src": "1256:162:11",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1802,
+        "src": "202:1218:11"
+      }
+    ],
+    "src": "0:1420:11"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/ens/ENSConsumer.sol",
+    "exportedSymbols": {
+      "ENSConsumer": [
+        1801
+      ]
+    },
+    "id": 1802,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1734,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:11"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/ens/ENS.sol",
+        "file": "../ens/ENS.sol",
+        "id": 1735,
+        "nodeType": "ImportDirective",
+        "scope": 1802,
+        "sourceUnit": 1733,
+        "src": "24:24:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/utils/strings.sol",
+        "file": "../utils/strings.sol",
+        "id": 1736,
+        "nodeType": "ImportDirective",
+        "scope": 1802,
+        "sourceUnit": 29451,
+        "src": "49:30:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title ENSConsumer\n@dev Helper contract to resolve ENS names.\n@author Julien Niset - <julien@argent.im>",
+        "fullyImplemented": true,
+        "id": 1801,
+        "linearizedBaseContracts": [
+          1801
+        ],
+        "name": "ENSConsumer",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 1738,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1737,
+              "name": "strings",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 29450,
+              "src": "236:7:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_strings_$29450",
+                "typeString": "library strings"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "230:20:11",
+            "typeName": null
+          },
+          {
+            "constant": true,
+            "id": 1741,
+            "name": "ADDR_REVERSE_NODE",
+            "nodeType": "VariableDeclaration",
+            "scope": 1801,
+            "src": "288:110:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 1739,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "288:7:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307839316431373737373831383834643033613637353761383033393936653338646532613432393637666233376565616361373237323932373130323561396532",
+              "id": 1740,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "332:66:11",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_65955458610802586644366824307633271870356699036341805474246458084352783133154_by_1",
+                "typeString": "int_const 6595...(69 digits omitted)...3154"
+              },
+              "value": "0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1743,
+            "name": "ensRegistry",
+            "nodeType": "VariableDeclaration",
+            "scope": 1801,
+            "src": "444:19:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1742,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "444:7:11",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1752,
+              "nodeType": "Block",
+              "src": "666:43:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1750,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1748,
+                      "name": "ensRegistry",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1743,
+                      "src": "676:11:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 1749,
+                      "name": "_ensRegistry",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1745,
+                      "src": "690:12:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "676:26:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 1751,
+                  "nodeType": "ExpressionStatement",
+                  "src": "676:26:11"
+                }
+              ]
+            },
+            "documentation": "@dev No address should be provided when deploying on Mainnet to avoid storage cost. The \ncontract will use the hardcoded value.",
+            "id": 1753,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1746,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1745,
+                  "name": "_ensRegistry",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1753,
+                  "src": "637:20:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1744,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "637:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "636:22:11"
+            },
+            "returnParameters": {
+              "id": 1747,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "666:0:11"
+            },
+            "scope": 1801,
+            "src": "625:84:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1775,
+              "nodeType": "Block",
+              "src": "892:118:11",
+              "statements": [
+                {
+                  "assignments": [
+                    1761
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1761,
+                      "name": "resolver",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1775,
+                      "src": "902:16:11",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 1760,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "902:7:11",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1767,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1765,
+                        "name": "_node",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1755,
+                        "src": "947:5:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 1762,
+                          "name": "getENSRegistry",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1786,
+                          "src": "921:14:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_contract$_ENSRegistry_$1672_$",
+                            "typeString": "function () view returns (contract ENSRegistry)"
+                          }
+                        },
+                        "id": 1763,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "921:16:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                          "typeString": "contract ENSRegistry"
+                        }
+                      },
+                      "id": 1764,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "resolver",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1634,
+                      "src": "921:25:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_address_$",
+                        "typeString": "function (bytes32) view external returns (address)"
+                      }
+                    },
+                    "id": 1766,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "921:32:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "902:51:11"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1772,
+                        "name": "_node",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1755,
+                        "src": "997:5:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1769,
+                            "name": "resolver",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1761,
+                            "src": "982:8:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 1768,
+                          "name": "ENSResolver",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1701,
+                          "src": "970:11:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_ENSResolver_$1701_$",
+                            "typeString": "type(contract ENSResolver)"
+                          }
+                        },
+                        "id": 1770,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "970:21:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ENSResolver_$1701",
+                          "typeString": "contract ENSResolver"
+                        }
+                      },
+                      "id": 1771,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1679,
+                      "src": "970:26:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_address_$",
+                        "typeString": "function (bytes32) view external returns (address)"
+                      }
+                    },
+                    "id": 1773,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "970:33:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 1759,
+                  "id": 1774,
+                  "nodeType": "Return",
+                  "src": "963:40:11"
+                }
+              ]
+            },
+            "documentation": "@dev Resolves an ENS name to an address.\n@param _node The namehash of the ENS name. ",
+            "id": 1776,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "resolveEns",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1756,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1755,
+                  "name": "_node",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1776,
+                  "src": "847:13:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1754,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "847:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "846:15:11"
+            },
+            "returnParameters": {
+              "id": 1759,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1758,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1776,
+                  "src": "883:7:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1757,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "883:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "882:9:11"
+            },
+            "scope": 1801,
+            "src": "827:183:11",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1785,
+              "nodeType": "Block",
+              "src": "1134:48:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1782,
+                        "name": "ensRegistry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1743,
+                        "src": "1163:11:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1781,
+                      "name": "ENSRegistry",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1672,
+                      "src": "1151:11:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_ENSRegistry_$1672_$",
+                        "typeString": "type(contract ENSRegistry)"
+                      }
+                    },
+                    "id": 1783,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1151:24:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                      "typeString": "contract ENSRegistry"
+                    }
+                  },
+                  "functionReturnParameters": 1780,
+                  "id": 1784,
+                  "nodeType": "Return",
+                  "src": "1144:31:11"
+                }
+              ]
+            },
+            "documentation": "@dev Gets the official ENS registry.",
+            "id": 1786,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getENSRegistry",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1777,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1097:2:11"
+            },
+            "returnParameters": {
+              "id": 1780,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1779,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1786,
+                  "src": "1121:11:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                    "typeString": "contract ENSRegistry"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1778,
+                    "name": "ENSRegistry",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1672,
+                    "src": "1121:11:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                      "typeString": "contract ENSRegistry"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1120:13:11"
+            },
+            "scope": 1801,
+            "src": "1074:108:11",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1799,
+              "nodeType": "Block",
+              "src": "1332:86:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1795,
+                            "name": "ADDR_REVERSE_NODE",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1741,
+                            "src": "1392:17:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "id": 1792,
+                              "name": "getENSRegistry",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1786,
+                              "src": "1369:14:11",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_view$__$returns$_t_contract$_ENSRegistry_$1672_$",
+                                "typeString": "function () view returns (contract ENSRegistry)"
+                              }
+                            },
+                            "id": 1793,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1369:16:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ENSRegistry_$1672",
+                              "typeString": "contract ENSRegistry"
+                            }
+                          },
+                          "id": 1794,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "owner",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 1627,
+                          "src": "1369:22:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_address_$",
+                            "typeString": "function (bytes32) view external returns (address)"
+                          }
+                        },
+                        "id": 1796,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1369:41:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 1791,
+                      "name": "ENSReverseRegistrar",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1732,
+                      "src": "1349:19:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_ENSReverseRegistrar_$1732_$",
+                        "typeString": "type(contract ENSReverseRegistrar)"
+                      }
+                    },
+                    "id": 1797,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1349:62:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ENSReverseRegistrar_$1732",
+                      "typeString": "contract ENSReverseRegistrar"
+                    }
+                  },
+                  "functionReturnParameters": 1790,
+                  "id": 1798,
+                  "nodeType": "Return",
+                  "src": "1342:69:11"
+                }
+              ]
+            },
+            "documentation": "@dev Gets the official ENS reverse registrar. ",
+            "id": 1800,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getENSReverseRegistrar",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1787,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1287:2:11"
+            },
+            "returnParameters": {
+              "id": 1790,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1789,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1800,
+                  "src": "1311:19:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ENSReverseRegistrar_$1732",
+                    "typeString": "contract ENSReverseRegistrar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1788,
+                    "name": "ENSReverseRegistrar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1732,
+                    "src": "1311:19:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ENSReverseRegistrar_$1732",
+                      "typeString": "contract ENSReverseRegistrar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1310:21:11"
+            },
+            "scope": 1801,
+            "src": "1256:162:11",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1802,
+        "src": "202:1218:11"
+      }
+    ],
+    "src": "0:1420:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang",
+    "optimizer": true,
+    "runs": 200
+  },
+  "networks": {},
+  "schemaVersion": "2.2.4",
+  "updatedAt": "2020-02-29T16:28:22.457Z"
+}

@@ -1,0 +1,2605 @@
+{
+  "contractName": "V1PriceOracleInterface",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "asset",
+          "type": "address"
+        }
+      ],
+      "name": "assetPrices",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.4;\n\nimport \"./CErc20.sol\";\nimport \"./CToken.sol\";\nimport \"./PriceOracle.sol\";\nimport \"./Comptroller.sol\";\n\ninterface V1PriceOracleInterface {\n    function assetPrices(address asset) external view returns (uint);\n}\n\ncontract PriceOracleProxy is PriceOracle {\n    /**\n     * @notice The v1 price oracle, which will continue to serve prices\n     * prices for v1 assets\n     */\n    V1PriceOracleInterface public v1PriceOracle;\n\n    /**\n     * @notice The active comptroller, which will be checked for listing status\n     * to short circuit and return 0 for unlisted assets.\n     *\n     * @dev Listed markets are not part of the comptroller interface used by\n     * cTokens, so we assumena an instance of v1 comptroller.sol instead\n     */\n    Comptroller public comptroller;\n\n    /**\n     * @notice address of the cEther contract, which has a constant price\n     */\n    address public cEtherAddress;\n\n    /**\n     * @notice Indicator that this is a PriceOracle contract (for inspection)\n     */\n    bool public constant isPriceOracle = true;\n\n    /**\n     * @param comptroller_ The address of the active comptroller, which will\n     * be consulted for market listing status.\n     * @param v1PriceOracle_ The address of the v1 price oracle, which will\n     * continue to operate and hold prices for collateral assets.\n     * @param cEtherAddress_ The address of the cEther contract, which will\n     * return a constant 1e18, since all prices relative to ether\n     */\n    constructor(address comptroller_, address v1PriceOracle_, address cEtherAddress_) public {\n        comptroller = Comptroller(comptroller_);\n        v1PriceOracle = V1PriceOracleInterface(v1PriceOracle_);\n        cEtherAddress = cEtherAddress_;\n    }\n\n    /**\n     * @notice Get the underlying price of a listed cToken asset\n     * @param cToken The cToken to get the underlying price of\n     * @return The underlying asset price mantissa (scaled by 1e18).\n     *  Zero means the price is unavailable.\n     */\n    function getUnderlyingPrice(CToken cToken) public view returns (uint) {\n        address cTokenAddress = address(cToken);\n        (bool isListed, ) = comptroller.markets(cTokenAddress);\n\n        if (!isListed) {\n            // not listed, worthless\n            return 0;\n        } else if (cTokenAddress == cEtherAddress) {\n            // ether always worth 1\n            return 1e18;\n        } else {\n            // read from v1 oracle\n            address underlying = CErc20(cTokenAddress).underlying();\n            return v1PriceOracle.assetPrices(underlying);\n        }\n    }\n}\n",
+  "sourcePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/PriceOracleProxy.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/PriceOracleProxy.sol",
+    "exportedSymbols": {
+      "PriceOracleProxy": [
+        21928
+      ],
+      "V1PriceOracleInterface": [
+        21842
+      ]
+    },
+    "id": 21929,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 21830,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:61"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/CErc20.sol",
+        "file": "./CErc20.sol",
+        "id": 21831,
+        "nodeType": "ImportDirective",
+        "scope": 21929,
+        "sourceUnit": 14006,
+        "src": "25:22:61",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/CToken.sol",
+        "file": "./CToken.sol",
+        "id": 21832,
+        "nodeType": "ImportDirective",
+        "scope": 21929,
+        "sourceUnit": 18108,
+        "src": "48:22:61",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/PriceOracle.sol",
+        "file": "./PriceOracle.sol",
+        "id": 21833,
+        "nodeType": "ImportDirective",
+        "scope": 21929,
+        "sourceUnit": 21829,
+        "src": "71:27:61",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/Comptroller.sol",
+        "file": "./Comptroller.sol",
+        "id": 21834,
+        "nodeType": "ImportDirective",
+        "scope": 21929,
+        "sourceUnit": 20489,
+        "src": "99:27:61",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 21842,
+        "linearizedBaseContracts": [
+          21842
+        ],
+        "name": "V1PriceOracleInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 21841,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "assetPrices",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 21837,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21836,
+                  "name": "asset",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21841,
+                  "src": "188:13:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 21835,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "188:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "187:15:61"
+            },
+            "returnParameters": {
+              "id": 21840,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21839,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21841,
+                  "src": "226:4:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21838,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "226:4:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "225:6:61"
+            },
+            "scope": 21842,
+            "src": "167:65:61",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 21929,
+        "src": "128:106:61"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 21843,
+              "name": "PriceOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 21828,
+              "src": "265:11:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PriceOracle_$21828",
+                "typeString": "contract PriceOracle"
+              }
+            },
+            "id": 21844,
+            "nodeType": "InheritanceSpecifier",
+            "src": "265:11:61"
+          }
+        ],
+        "contractDependencies": [
+          21828
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 21928,
+        "linearizedBaseContracts": [
+          21928,
+          21828
+        ],
+        "name": "PriceOracleProxy",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 21846,
+            "name": "v1PriceOracle",
+            "nodeType": "VariableDeclaration",
+            "scope": 21928,
+            "src": "399:43:61",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+              "typeString": "contract V1PriceOracleInterface"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 21845,
+              "name": "V1PriceOracleInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 21842,
+              "src": "399:22:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                "typeString": "contract V1PriceOracleInterface"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 21848,
+            "name": "comptroller",
+            "nodeType": "VariableDeclaration",
+            "scope": 21928,
+            "src": "760:30:61",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_Comptroller_$20488",
+              "typeString": "contract Comptroller"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 21847,
+              "name": "Comptroller",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 20488,
+              "src": "760:11:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Comptroller_$20488",
+                "typeString": "contract Comptroller"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 21850,
+            "name": "cEtherAddress",
+            "nodeType": "VariableDeclaration",
+            "scope": 21928,
+            "src": "887:28:61",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 21849,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "887:7:61",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 21853,
+            "name": "isPriceOracle",
+            "nodeType": "VariableDeclaration",
+            "scope": 21928,
+            "src": "1016:41:61",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 21851,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "1016:4:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "74727565",
+              "id": 21852,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1053:4:61",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "true"
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 21878,
+              "nodeType": "Block",
+              "src": "1577:160:61",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 21866,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 21862,
+                      "name": "comptroller",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21848,
+                      "src": "1587:11:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Comptroller_$20488",
+                        "typeString": "contract Comptroller"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 21864,
+                          "name": "comptroller_",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 21855,
+                          "src": "1613:12:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 21863,
+                        "name": "Comptroller",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20488,
+                        "src": "1601:11:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_Comptroller_$20488_$",
+                          "typeString": "type(contract Comptroller)"
+                        }
+                      },
+                      "id": 21865,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1601:25:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Comptroller_$20488",
+                        "typeString": "contract Comptroller"
+                      }
+                    },
+                    "src": "1587:39:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Comptroller_$20488",
+                      "typeString": "contract Comptroller"
+                    }
+                  },
+                  "id": 21867,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1587:39:61"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 21872,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 21868,
+                      "name": "v1PriceOracle",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21846,
+                      "src": "1636:13:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                        "typeString": "contract V1PriceOracleInterface"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 21870,
+                          "name": "v1PriceOracle_",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 21857,
+                          "src": "1675:14:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 21869,
+                        "name": "V1PriceOracleInterface",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21842,
+                        "src": "1652:22:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_V1PriceOracleInterface_$21842_$",
+                          "typeString": "type(contract V1PriceOracleInterface)"
+                        }
+                      },
+                      "id": 21871,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1652:38:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                        "typeString": "contract V1PriceOracleInterface"
+                      }
+                    },
+                    "src": "1636:54:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                      "typeString": "contract V1PriceOracleInterface"
+                    }
+                  },
+                  "id": 21873,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1636:54:61"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 21876,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 21874,
+                      "name": "cEtherAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21850,
+                      "src": "1700:13:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 21875,
+                      "name": "cEtherAddress_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21859,
+                      "src": "1716:14:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1700:30:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 21877,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1700:30:61"
+                }
+              ]
+            },
+            "documentation": "@param comptroller_ The address of the active comptroller, which will\nbe consulted for market listing status.\n@param v1PriceOracle_ The address of the v1 price oracle, which will\ncontinue to operate and hold prices for collateral assets.\n@param cEtherAddress_ The address of the cEther contract, which will\nreturn a constant 1e18, since all prices relative to ether",
+            "id": 21879,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 21860,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21855,
+                  "name": "comptroller_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21879,
+                  "src": "1500:20:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 21854,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1500:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21857,
+                  "name": "v1PriceOracle_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21879,
+                  "src": "1522:22:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 21856,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1522:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21859,
+                  "name": "cEtherAddress_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21879,
+                  "src": "1546:22:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 21858,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1546:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1499:70:61"
+            },
+            "returnParameters": {
+              "id": 21861,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1577:0:61"
+            },
+            "scope": 21928,
+            "src": "1488:249:61",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 21926,
+              "nodeType": "Block",
+              "src": "2071:508:61",
+              "statements": [
+                {
+                  "assignments": [
+                    21887
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 21887,
+                      "name": "cTokenAddress",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 21926,
+                      "src": "2081:21:61",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 21886,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2081:7:61",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 21891,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 21889,
+                        "name": "cToken",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21881,
+                        "src": "2113:6:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_CToken_$18107",
+                          "typeString": "contract CToken"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_CToken_$18107",
+                          "typeString": "contract CToken"
+                        }
+                      ],
+                      "id": 21888,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "2105:7:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": "address"
+                    },
+                    "id": 21890,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2105:15:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2081:39:61"
+                },
+                {
+                  "assignments": [
+                    21893,
+                    null
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 21893,
+                      "name": "isListed",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 21926,
+                      "src": "2131:13:61",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 21892,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2131:4:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    null
+                  ],
+                  "id": 21898,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 21896,
+                        "name": "cTokenAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21887,
+                        "src": "2170:13:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 21894,
+                        "name": "comptroller",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21848,
+                        "src": "2150:11:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Comptroller_$20488",
+                          "typeString": "contract Comptroller"
+                        }
+                      },
+                      "id": 21895,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "markets",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 18322,
+                      "src": "2150:19:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$_t_uint256_$",
+                        "typeString": "function (address) view external returns (bool,uint256)"
+                      }
+                    },
+                    "id": 21897,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2150:34:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bool_$_t_uint256_$",
+                      "typeString": "tuple(bool,uint256)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2130:54:61"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "id": 21900,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "!",
+                    "prefix": true,
+                    "src": "2199:9:61",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "id": 21899,
+                      "name": "isListed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21893,
+                      "src": "2200:8:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "condition": {
+                      "argumentTypes": null,
+                      "commonType": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "id": 21906,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "argumentTypes": null,
+                        "id": 21904,
+                        "name": "cTokenAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21887,
+                        "src": "2290:13:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "argumentTypes": null,
+                        "id": 21905,
+                        "name": "cEtherAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21850,
+                        "src": "2307:13:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "src": "2290:30:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseBody": {
+                      "id": 21923,
+                      "nodeType": "Block",
+                      "src": "2400:173:61",
+                      "statements": [
+                        {
+                          "assignments": [
+                            21911
+                          ],
+                          "declarations": [
+                            {
+                              "constant": false,
+                              "id": 21911,
+                              "name": "underlying",
+                              "nodeType": "VariableDeclaration",
+                              "scope": 21923,
+                              "src": "2449:18:61",
+                              "stateVariable": false,
+                              "storageLocation": "default",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "typeName": {
+                                "id": 21910,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "2449:7:61",
+                                "stateMutability": "nonpayable",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              },
+                              "value": null,
+                              "visibility": "internal"
+                            }
+                          ],
+                          "id": 21917,
+                          "initialValue": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "argumentTypes": null,
+                                "arguments": [
+                                  {
+                                    "argumentTypes": null,
+                                    "id": 21913,
+                                    "name": "cTokenAddress",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 21887,
+                                    "src": "2477:13:61",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  ],
+                                  "id": 21912,
+                                  "name": "CErc20",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 14005,
+                                  "src": "2470:6:61",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_contract$_CErc20_$14005_$",
+                                    "typeString": "type(contract CErc20)"
+                                  }
+                                },
+                                "id": 21914,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "2470:21:61",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_CErc20_$14005",
+                                  "typeString": "contract CErc20"
+                                }
+                              },
+                              "id": 21915,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "underlying",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 13735,
+                              "src": "2470:32:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                                "typeString": "function () view external returns (address)"
+                              }
+                            },
+                            "id": 21916,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2470:34:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "VariableDeclarationStatement",
+                          "src": "2449:55:61"
+                        },
+                        {
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 21920,
+                                "name": "underlying",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 21911,
+                                "src": "2551:10:61",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 21918,
+                                "name": "v1PriceOracle",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 21846,
+                                "src": "2525:13:61",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                                  "typeString": "contract V1PriceOracleInterface"
+                                }
+                              },
+                              "id": 21919,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "assetPrices",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 21841,
+                              "src": "2525:25:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                                "typeString": "function (address) view external returns (uint256)"
+                              }
+                            },
+                            "id": 21921,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2525:37:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "functionReturnParameters": 21885,
+                          "id": 21922,
+                          "nodeType": "Return",
+                          "src": "2518:44:61"
+                        }
+                      ]
+                    },
+                    "id": 21924,
+                    "nodeType": "IfStatement",
+                    "src": "2286:287:61",
+                    "trueBody": {
+                      "id": 21909,
+                      "nodeType": "Block",
+                      "src": "2322:72:61",
+                      "statements": [
+                        {
+                          "expression": {
+                            "argumentTypes": null,
+                            "hexValue": "31653138",
+                            "id": 21907,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "2379:4:61",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_1000000000000000000_by_1",
+                              "typeString": "int_const 1000000000000000000"
+                            },
+                            "value": "1e18"
+                          },
+                          "functionReturnParameters": 21885,
+                          "id": 21908,
+                          "nodeType": "Return",
+                          "src": "2372:11:61"
+                        }
+                      ]
+                    }
+                  },
+                  "id": 21925,
+                  "nodeType": "IfStatement",
+                  "src": "2195:378:61",
+                  "trueBody": {
+                    "id": 21903,
+                    "nodeType": "Block",
+                    "src": "2210:70:61",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "hexValue": "30",
+                          "id": 21901,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2268:1:61",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        },
+                        "functionReturnParameters": 21885,
+                        "id": 21902,
+                        "nodeType": "Return",
+                        "src": "2261:8:61"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": "@notice Get the underlying price of a listed cToken asset\n@param cToken The cToken to get the underlying price of\n@return The underlying asset price mantissa (scaled by 1e18).\n Zero means the price is unavailable.",
+            "id": 21927,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getUnderlyingPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 21882,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21881,
+                  "name": "cToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21927,
+                  "src": "2029:13:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_CToken_$18107",
+                    "typeString": "contract CToken"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 21880,
+                    "name": "CToken",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 18107,
+                    "src": "2029:6:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_CToken_$18107",
+                      "typeString": "contract CToken"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2028:15:61"
+            },
+            "returnParameters": {
+              "id": 21885,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21884,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21927,
+                  "src": "2065:4:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21883,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2065:4:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2064:6:61"
+            },
+            "scope": 21928,
+            "src": "2001:578:61",
+            "stateMutability": "view",
+            "superFunction": 21827,
+            "visibility": "public"
+          }
+        ],
+        "scope": 21929,
+        "src": "236:2345:61"
+      }
+    ],
+    "src": "0:2582:61"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/PriceOracleProxy.sol",
+    "exportedSymbols": {
+      "PriceOracleProxy": [
+        21928
+      ],
+      "V1PriceOracleInterface": [
+        21842
+      ]
+    },
+    "id": 21929,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 21830,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:61"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/CErc20.sol",
+        "file": "./CErc20.sol",
+        "id": 21831,
+        "nodeType": "ImportDirective",
+        "scope": 21929,
+        "sourceUnit": 14006,
+        "src": "25:22:61",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/CToken.sol",
+        "file": "./CToken.sol",
+        "id": 21832,
+        "nodeType": "ImportDirective",
+        "scope": 21929,
+        "sourceUnit": 18108,
+        "src": "48:22:61",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/PriceOracle.sol",
+        "file": "./PriceOracle.sol",
+        "id": 21833,
+        "nodeType": "ImportDirective",
+        "scope": 21929,
+        "sourceUnit": 21829,
+        "src": "71:27:61",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/Argent/argent-contracts/contracts/test/compound/Comptroller.sol",
+        "file": "./Comptroller.sol",
+        "id": 21834,
+        "nodeType": "ImportDirective",
+        "scope": 21929,
+        "sourceUnit": 20489,
+        "src": "99:27:61",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 21842,
+        "linearizedBaseContracts": [
+          21842
+        ],
+        "name": "V1PriceOracleInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 21841,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "assetPrices",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 21837,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21836,
+                  "name": "asset",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21841,
+                  "src": "188:13:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 21835,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "188:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "187:15:61"
+            },
+            "returnParameters": {
+              "id": 21840,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21839,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21841,
+                  "src": "226:4:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21838,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "226:4:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "225:6:61"
+            },
+            "scope": 21842,
+            "src": "167:65:61",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 21929,
+        "src": "128:106:61"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 21843,
+              "name": "PriceOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 21828,
+              "src": "265:11:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PriceOracle_$21828",
+                "typeString": "contract PriceOracle"
+              }
+            },
+            "id": 21844,
+            "nodeType": "InheritanceSpecifier",
+            "src": "265:11:61"
+          }
+        ],
+        "contractDependencies": [
+          21828
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 21928,
+        "linearizedBaseContracts": [
+          21928,
+          21828
+        ],
+        "name": "PriceOracleProxy",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 21846,
+            "name": "v1PriceOracle",
+            "nodeType": "VariableDeclaration",
+            "scope": 21928,
+            "src": "399:43:61",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+              "typeString": "contract V1PriceOracleInterface"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 21845,
+              "name": "V1PriceOracleInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 21842,
+              "src": "399:22:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                "typeString": "contract V1PriceOracleInterface"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 21848,
+            "name": "comptroller",
+            "nodeType": "VariableDeclaration",
+            "scope": 21928,
+            "src": "760:30:61",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_Comptroller_$20488",
+              "typeString": "contract Comptroller"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 21847,
+              "name": "Comptroller",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 20488,
+              "src": "760:11:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Comptroller_$20488",
+                "typeString": "contract Comptroller"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 21850,
+            "name": "cEtherAddress",
+            "nodeType": "VariableDeclaration",
+            "scope": 21928,
+            "src": "887:28:61",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 21849,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "887:7:61",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 21853,
+            "name": "isPriceOracle",
+            "nodeType": "VariableDeclaration",
+            "scope": 21928,
+            "src": "1016:41:61",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 21851,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "1016:4:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "74727565",
+              "id": 21852,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1053:4:61",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "true"
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 21878,
+              "nodeType": "Block",
+              "src": "1577:160:61",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 21866,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 21862,
+                      "name": "comptroller",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21848,
+                      "src": "1587:11:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Comptroller_$20488",
+                        "typeString": "contract Comptroller"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 21864,
+                          "name": "comptroller_",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 21855,
+                          "src": "1613:12:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 21863,
+                        "name": "Comptroller",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20488,
+                        "src": "1601:11:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_Comptroller_$20488_$",
+                          "typeString": "type(contract Comptroller)"
+                        }
+                      },
+                      "id": 21865,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1601:25:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Comptroller_$20488",
+                        "typeString": "contract Comptroller"
+                      }
+                    },
+                    "src": "1587:39:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Comptroller_$20488",
+                      "typeString": "contract Comptroller"
+                    }
+                  },
+                  "id": 21867,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1587:39:61"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 21872,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 21868,
+                      "name": "v1PriceOracle",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21846,
+                      "src": "1636:13:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                        "typeString": "contract V1PriceOracleInterface"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 21870,
+                          "name": "v1PriceOracle_",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 21857,
+                          "src": "1675:14:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 21869,
+                        "name": "V1PriceOracleInterface",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21842,
+                        "src": "1652:22:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_V1PriceOracleInterface_$21842_$",
+                          "typeString": "type(contract V1PriceOracleInterface)"
+                        }
+                      },
+                      "id": 21871,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1652:38:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                        "typeString": "contract V1PriceOracleInterface"
+                      }
+                    },
+                    "src": "1636:54:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                      "typeString": "contract V1PriceOracleInterface"
+                    }
+                  },
+                  "id": 21873,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1636:54:61"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 21876,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 21874,
+                      "name": "cEtherAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21850,
+                      "src": "1700:13:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 21875,
+                      "name": "cEtherAddress_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21859,
+                      "src": "1716:14:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1700:30:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 21877,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1700:30:61"
+                }
+              ]
+            },
+            "documentation": "@param comptroller_ The address of the active comptroller, which will\nbe consulted for market listing status.\n@param v1PriceOracle_ The address of the v1 price oracle, which will\ncontinue to operate and hold prices for collateral assets.\n@param cEtherAddress_ The address of the cEther contract, which will\nreturn a constant 1e18, since all prices relative to ether",
+            "id": 21879,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 21860,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21855,
+                  "name": "comptroller_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21879,
+                  "src": "1500:20:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 21854,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1500:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21857,
+                  "name": "v1PriceOracle_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21879,
+                  "src": "1522:22:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 21856,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1522:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21859,
+                  "name": "cEtherAddress_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21879,
+                  "src": "1546:22:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 21858,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1546:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1499:70:61"
+            },
+            "returnParameters": {
+              "id": 21861,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1577:0:61"
+            },
+            "scope": 21928,
+            "src": "1488:249:61",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 21926,
+              "nodeType": "Block",
+              "src": "2071:508:61",
+              "statements": [
+                {
+                  "assignments": [
+                    21887
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 21887,
+                      "name": "cTokenAddress",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 21926,
+                      "src": "2081:21:61",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 21886,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2081:7:61",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 21891,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 21889,
+                        "name": "cToken",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21881,
+                        "src": "2113:6:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_CToken_$18107",
+                          "typeString": "contract CToken"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_CToken_$18107",
+                          "typeString": "contract CToken"
+                        }
+                      ],
+                      "id": 21888,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "2105:7:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": "address"
+                    },
+                    "id": 21890,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2105:15:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2081:39:61"
+                },
+                {
+                  "assignments": [
+                    21893,
+                    null
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 21893,
+                      "name": "isListed",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 21926,
+                      "src": "2131:13:61",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 21892,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2131:4:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    null
+                  ],
+                  "id": 21898,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 21896,
+                        "name": "cTokenAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21887,
+                        "src": "2170:13:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 21894,
+                        "name": "comptroller",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21848,
+                        "src": "2150:11:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Comptroller_$20488",
+                          "typeString": "contract Comptroller"
+                        }
+                      },
+                      "id": 21895,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "markets",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 18322,
+                      "src": "2150:19:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$_t_uint256_$",
+                        "typeString": "function (address) view external returns (bool,uint256)"
+                      }
+                    },
+                    "id": 21897,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2150:34:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bool_$_t_uint256_$",
+                      "typeString": "tuple(bool,uint256)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2130:54:61"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "id": 21900,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "!",
+                    "prefix": true,
+                    "src": "2199:9:61",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "id": 21899,
+                      "name": "isListed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21893,
+                      "src": "2200:8:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "condition": {
+                      "argumentTypes": null,
+                      "commonType": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "id": 21906,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "argumentTypes": null,
+                        "id": 21904,
+                        "name": "cTokenAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21887,
+                        "src": "2290:13:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "argumentTypes": null,
+                        "id": 21905,
+                        "name": "cEtherAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21850,
+                        "src": "2307:13:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "src": "2290:30:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseBody": {
+                      "id": 21923,
+                      "nodeType": "Block",
+                      "src": "2400:173:61",
+                      "statements": [
+                        {
+                          "assignments": [
+                            21911
+                          ],
+                          "declarations": [
+                            {
+                              "constant": false,
+                              "id": 21911,
+                              "name": "underlying",
+                              "nodeType": "VariableDeclaration",
+                              "scope": 21923,
+                              "src": "2449:18:61",
+                              "stateVariable": false,
+                              "storageLocation": "default",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "typeName": {
+                                "id": 21910,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "2449:7:61",
+                                "stateMutability": "nonpayable",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              },
+                              "value": null,
+                              "visibility": "internal"
+                            }
+                          ],
+                          "id": 21917,
+                          "initialValue": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "argumentTypes": null,
+                                "arguments": [
+                                  {
+                                    "argumentTypes": null,
+                                    "id": 21913,
+                                    "name": "cTokenAddress",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 21887,
+                                    "src": "2477:13:61",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  ],
+                                  "id": 21912,
+                                  "name": "CErc20",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 14005,
+                                  "src": "2470:6:61",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_contract$_CErc20_$14005_$",
+                                    "typeString": "type(contract CErc20)"
+                                  }
+                                },
+                                "id": 21914,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "2470:21:61",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_CErc20_$14005",
+                                  "typeString": "contract CErc20"
+                                }
+                              },
+                              "id": 21915,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "underlying",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 13735,
+                              "src": "2470:32:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                                "typeString": "function () view external returns (address)"
+                              }
+                            },
+                            "id": 21916,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2470:34:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "VariableDeclarationStatement",
+                          "src": "2449:55:61"
+                        },
+                        {
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 21920,
+                                "name": "underlying",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 21911,
+                                "src": "2551:10:61",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 21918,
+                                "name": "v1PriceOracle",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 21846,
+                                "src": "2525:13:61",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_V1PriceOracleInterface_$21842",
+                                  "typeString": "contract V1PriceOracleInterface"
+                                }
+                              },
+                              "id": 21919,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "assetPrices",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 21841,
+                              "src": "2525:25:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                                "typeString": "function (address) view external returns (uint256)"
+                              }
+                            },
+                            "id": 21921,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2525:37:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "functionReturnParameters": 21885,
+                          "id": 21922,
+                          "nodeType": "Return",
+                          "src": "2518:44:61"
+                        }
+                      ]
+                    },
+                    "id": 21924,
+                    "nodeType": "IfStatement",
+                    "src": "2286:287:61",
+                    "trueBody": {
+                      "id": 21909,
+                      "nodeType": "Block",
+                      "src": "2322:72:61",
+                      "statements": [
+                        {
+                          "expression": {
+                            "argumentTypes": null,
+                            "hexValue": "31653138",
+                            "id": 21907,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "2379:4:61",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_1000000000000000000_by_1",
+                              "typeString": "int_const 1000000000000000000"
+                            },
+                            "value": "1e18"
+                          },
+                          "functionReturnParameters": 21885,
+                          "id": 21908,
+                          "nodeType": "Return",
+                          "src": "2372:11:61"
+                        }
+                      ]
+                    }
+                  },
+                  "id": 21925,
+                  "nodeType": "IfStatement",
+                  "src": "2195:378:61",
+                  "trueBody": {
+                    "id": 21903,
+                    "nodeType": "Block",
+                    "src": "2210:70:61",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "hexValue": "30",
+                          "id": 21901,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2268:1:61",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        },
+                        "functionReturnParameters": 21885,
+                        "id": 21902,
+                        "nodeType": "Return",
+                        "src": "2261:8:61"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": "@notice Get the underlying price of a listed cToken asset\n@param cToken The cToken to get the underlying price of\n@return The underlying asset price mantissa (scaled by 1e18).\n Zero means the price is unavailable.",
+            "id": 21927,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getUnderlyingPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 21882,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21881,
+                  "name": "cToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21927,
+                  "src": "2029:13:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_CToken_$18107",
+                    "typeString": "contract CToken"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 21880,
+                    "name": "CToken",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 18107,
+                    "src": "2029:6:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_CToken_$18107",
+                      "typeString": "contract CToken"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2028:15:61"
+            },
+            "returnParameters": {
+              "id": 21885,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21884,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21927,
+                  "src": "2065:4:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21883,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2065:4:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2064:6:61"
+            },
+            "scope": 21928,
+            "src": "2001:578:61",
+            "stateMutability": "view",
+            "superFunction": 21827,
+            "visibility": "public"
+          }
+        ],
+        "scope": 21929,
+        "src": "236:2345:61"
+      }
+    ],
+    "src": "0:2582:61"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang",
+    "optimizer": true,
+    "runs": 200
+  },
+  "networks": {},
+  "schemaVersion": "2.2.4",
+  "updatedAt": "2020-02-29T16:28:22.624Z"
+}
